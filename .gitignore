@@ -260,3 +260,8 @@ Session.vim
 
 # VS Launch
 launchSettings.json
+
+#temp files
+deps/linux
+deps/win
+deps/mac

@@ -1,6 +1,7 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImGui.NET", "ImGui.NET\ImGui.NET.csproj", "{AD548A1D-01B2-410E-B3ED-ADAC05C3C4A3}"
 EndProject
@@ -8,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImGui.NET.SampleProgram", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImGui.NET.SampleProgram.XNA", "ImGui.NET.SampleProgram.XNA\ImGui.NET.SampleProgram.XNA.csproj", "{3024336E-9A19-475F-A95D-60A60C0B1C0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerator", "CodeGenerator\CodeGenerator.csproj", "{62A4CFE3-C5F5-45F5-AD18-3F7E6739BD09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeGenerator", "CodeGenerator\CodeGenerator.csproj", "{62A4CFE3-C5F5-45F5-AD18-3F7E6739BD09}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImPlot.NET", "ImPlot.NET\ImPlot.NET.csproj", "{817A9820-E750-43AB-B89E-FD51E58ACBF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imnodes.NET", "imnodes.NET\imnodes.NET.csproj", "{2786BF48-AE57-44EE-9E28-401AE88E972D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImNodes.NET", "imnodes.NET\ImNodes.NET.csproj", "{2786BF48-AE57-44EE-9E28-401AE88E972D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImGuizmo.NET", "ImGuizmo.NET\ImGuizmo.NET.csproj", "{760568AB-DCC9-443E-ADFA-2B06B2E2B421}"
 EndProject

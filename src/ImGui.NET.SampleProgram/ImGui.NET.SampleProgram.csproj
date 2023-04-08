@@ -11,7 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ImGui.NET" Version="1.89.1" />
+    <PackageReference Include="Twizzle.ImGui.NET" Version="1.89.4" />
+    <PackageReference Include="Twizzle.ImPlot.NET" Version="1.89.4" />
     <PackageReference Include="Veldrid" Version="4.9.0" />
     <PackageReference Include="Veldrid.StartupUtilities" Version="4.9.0" />
   </ItemGroup>

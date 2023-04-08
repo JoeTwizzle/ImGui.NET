@@ -20,9 +20,11 @@ namespace ImGuizmoNET
         [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImGuizmo_Enable(byte enable);
         [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImGuizmo_IsOverNil();
+        public static extern Style* ImGuizmo_GetStyle();
         [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImGuizmo_IsOverOPERATION(OPERATION op);
+        public static extern byte ImGuizmo_IsOver_Nil();
+        [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte ImGuizmo_IsOver_OPERATION(OPERATION op);
         [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte ImGuizmo_IsUsing();
         [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
@@ -42,6 +44,12 @@ namespace ImGuizmoNET
         [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImGuizmo_SetRect(float x, float y, float width, float height);
         [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImGuizmo_ViewManipulate(float* view, float length, Vector2 position, Vector2 size, uint backgroundColor);
+        public static extern void ImGuizmo_ViewManipulate_Float(float* view, float length, Vector2 position, Vector2 size, uint backgroundColor);
+        [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImGuizmo_ViewManipulate_FloatPtr(float* view, float* projection, OPERATION operation, MODE mode, float* matrix, float length, Vector2 position, Vector2 size, uint backgroundColor);
+        [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void Style_destroy(Style* self);
+        [DllImport("cimguizmo", CallingConvention = CallingConvention.Cdecl)]
+        public static extern Style* Style_Style();
     }
 }

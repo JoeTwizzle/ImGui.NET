@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using ImGui.NET.SampleProgram;
 using Veldrid.Sdl2;
 using System.Runtime.InteropServices;
+using ImGuiNET;
+using ImPlotNET;
 
 namespace ImGuiNET
 {
@@ -76,8 +78,13 @@ namespace ImGuiNET
             _windowWidth = width;
             _windowHeight = height;
 
+            //Init imgui context
             IntPtr context = ImGui.CreateContext();
             ImGui.SetCurrentContext(context);
+
+            //Init implot context
+            IntPtr plotcontext = ImPlot.CreateContext();
+            ImPlot.SetImGuiContext(context);
             ImGuiIOPtr io = ImGui.GetIO();
 
             io.ConfigFlags |= ImGuiConfigFlags.DockingEnable;
@@ -121,10 +128,10 @@ namespace ImGuiNET
             io.BackendFlags |= ImGuiBackendFlags.HasSetMousePos;
             io.BackendFlags |= ImGuiBackendFlags.PlatformHasViewports;
             io.BackendFlags |= ImGuiBackendFlags.RendererHasViewports;
-            ImGui.GetIO().BackendFlags |= ImGuiBackendFlags.RendererHasVtxOffset;
+            io.BackendFlags |= ImGuiBackendFlags.RendererHasVtxOffset;
 
-            var fonts = ImGui.GetIO().Fonts;
-            ImGui.GetIO().Fonts.AddFontDefault();
+            var fonts = io.Fonts;
+            io.Fonts.AddFontDefault();
 
             CreateDeviceResources(gd, outputDescription);
             SetKeyMappings();
@@ -501,7 +508,7 @@ namespace ImGuiNET
 
             ImGui.Text($"Main viewport Position: {ImGui.GetPlatformIO().Viewports[0].Pos}");
             ImGui.Text($"Main viewport Size: {ImGui.GetPlatformIO().Viewports[0].Size}");
-            ImGui.Text($"MoouseHoveredViewport: {ImGui.GetIO().MouseHoveredViewport}");
+            ImGui.Text($"MouseHoveredViewport: {ImGui.GetIO().MouseHoveredViewport}");
         }
 
         private unsafe void UpdateMonitors()
@@ -599,7 +606,7 @@ namespace ImGuiNET
 
             io.MousePos = new Vector2(x, y);
             io.MouseWheel = snapshot.WheelDelta;
-
+            io = ImGui.GetIO();
             IReadOnlyList<char> keyCharPresses = snapshot.KeyCharPresses;
             for (int i = 0; i < keyCharPresses.Count; i++)
             {

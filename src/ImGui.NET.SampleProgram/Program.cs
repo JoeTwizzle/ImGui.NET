@@ -1,6 +1,10 @@
-﻿using System;
+﻿using ImPlotNET;
+using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Threading;
+using System.Xml.Linq;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
@@ -50,16 +54,17 @@ namespace ImGuiNET
             // _memoryEditor = new MemoryEditor();
             Random random = new Random();
             _memoryEditorData = Enumerable.Range(0, 1024).Select(i => (byte)random.Next(255)).ToArray();
-
+            _gd.SyncToVerticalBlank = false;
             // Main application loop
+            long prev = Stopwatch.GetTimestamp();
             while (_window.Exists)
             {
                 InputSnapshot snapshot = _window.PumpEvents();
                 if (!_window.Exists) { break; }
-                _controller.Update(1f / 60f, snapshot); // Feed the input events to our ImGui controller, which passes them through to ImGui.
-
+                long current = Stopwatch.GetTimestamp();
+                _controller.Update((current - prev) * 1.0E-7f, snapshot); // Feed the input events to our ImGui controller, which passes them through to ImGui.
+                prev = current;
                 SubmitUI();
-
                 _cl.Begin();
                 _cl.SetFramebuffer(_gd.MainSwapchain.Framebuffer);
                 _cl.ClearColorTarget(0, new RgbaFloat(_clearColor.X, _clearColor.Y, _clearColor.Z, 1f));
@@ -69,13 +74,18 @@ namespace ImGuiNET
                 _gd.SwapBuffers(_gd.MainSwapchain);
                 _controller.SwapExtraWindows(_gd);
             }
-
             // Clean up Veldrid resources
             _gd.WaitForIdle();
             _controller.Dispose();
             _cl.Dispose();
             _gd.Dispose();
         }
+
+        const int maxPlotSize = 1000;
+
+        static float[] _frameTimes = new float[maxPlotSize];
+        static float[] _fps = new float[maxPlotSize];
+
 
         private static unsafe void SubmitUI()
         {
@@ -104,6 +114,19 @@ namespace ImGuiNET
 
                 float framerate = ImGui.GetIO().Framerate;
                 ImGui.Text($"Application average {1000.0f / framerate:0.##} ms/frame ({framerate:0.#} FPS)");
+
+                Array.Copy(_frameTimes, 1, _frameTimes, 0, maxPlotSize - 1);
+                Array.Copy(_fps, 1, _fps, 0, maxPlotSize - 1);
+                _frameTimes[maxPlotSize - 1] = 1000.0f / framerate;
+                _fps[maxPlotSize - 1] = framerate;
+
+                // Plot frametime using ImPlot
+                if (ImPlot.BeginPlot("Frametime plot"))
+                {
+                    ImPlot.PlotLine("Frame time", ref _frameTimes[0], 1000);
+                    ImPlot.PlotLine("Frames per second", ref _fps[0], 1000);
+                    ImPlot.EndPlot();
+                }
             }
 
             // 2. Show another simple window. In most cases you will use an explicit Begin/End pair to name your windows.
@@ -124,7 +147,7 @@ namespace ImGuiNET
                 ImGui.SetNextWindowPos(new Vector2(650, 20), ImGuiCond.FirstUseEver);
                 ImGui.ShowDemoWindow(ref _showImGuiDemoWindow);
             }
-            
+
             if (ImGui.TreeNode("Tabs"))
             {
                 if (ImGui.TreeNode("Basic"))

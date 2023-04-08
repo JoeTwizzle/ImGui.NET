@@ -44,6 +44,8 @@ namespace ImGuiNET
         public byte ConfigWindowsResizeFromEdges;
         public byte ConfigWindowsMoveFromTitleBarOnly;
         public float ConfigMemoryCompactTimer;
+        public byte ConfigDebugBeginReturnValueOnce;
+        public byte ConfigDebugBeginReturnValueLoop;
         public byte* BackendPlatformName;
         public byte* BackendRendererName;
         public void* BackendPlatformUserData;
@@ -71,6 +73,7 @@ namespace ImGuiNET
         public fixed int KeyMap[652];
         public fixed byte KeysDown[652];
         public fixed float NavInputs[16];
+        public IntPtr Ctx;
         public Vector2 MousePos;
         public fixed byte MouseDown[5];
         public float MouseWheel;
@@ -809,6 +812,8 @@ namespace ImGuiNET
         public ref bool ConfigWindowsResizeFromEdges => ref Unsafe.AsRef<bool>(&NativePtr->ConfigWindowsResizeFromEdges);
         public ref bool ConfigWindowsMoveFromTitleBarOnly => ref Unsafe.AsRef<bool>(&NativePtr->ConfigWindowsMoveFromTitleBarOnly);
         public ref float ConfigMemoryCompactTimer => ref Unsafe.AsRef<float>(&NativePtr->ConfigMemoryCompactTimer);
+        public ref bool ConfigDebugBeginReturnValueOnce => ref Unsafe.AsRef<bool>(&NativePtr->ConfigDebugBeginReturnValueOnce);
+        public ref bool ConfigDebugBeginReturnValueLoop => ref Unsafe.AsRef<bool>(&NativePtr->ConfigDebugBeginReturnValueLoop);
         public NullTerminatedString BackendPlatformName => new NullTerminatedString(NativePtr->BackendPlatformName);
         public NullTerminatedString BackendRendererName => new NullTerminatedString(NativePtr->BackendRendererName);
         public IntPtr BackendPlatformUserData { get => (IntPtr)NativePtr->BackendPlatformUserData; set => NativePtr->BackendPlatformUserData = (void*)value; }
@@ -836,6 +841,7 @@ namespace ImGuiNET
         public RangeAccessor<int> KeyMap => new RangeAccessor<int>(NativePtr->KeyMap, 652);
         public RangeAccessor<bool> KeysDown => new RangeAccessor<bool>(NativePtr->KeysDown, 652);
         public RangeAccessor<float> NavInputs => new RangeAccessor<float>(NativePtr->NavInputs, 16);
+        public ref IntPtr Ctx => ref Unsafe.AsRef<IntPtr>(&NativePtr->Ctx);
         public ref Vector2 MousePos => ref Unsafe.AsRef<Vector2>(&NativePtr->MousePos);
         public RangeAccessor<bool> MouseDown => new RangeAccessor<bool>(NativePtr->MouseDown, 5);
         public ref float MouseWheel => ref Unsafe.AsRef<float>(&NativePtr->MouseWheel);
@@ -931,9 +937,9 @@ namespace ImGuiNET
         {
             ImGuiNative.ImGuiIO_AddMouseViewportEvent((ImGuiIO*)(NativePtr), id);
         }
-        public void AddMouseWheelEvent(float wh_x, float wh_y)
+        public void AddMouseWheelEvent(float wheel_x, float wheel_y)
         {
-            ImGuiNative.ImGuiIO_AddMouseWheelEvent((ImGuiIO*)(NativePtr), wh_x, wh_y);
+            ImGuiNative.ImGuiIO_AddMouseWheelEvent((ImGuiIO*)(NativePtr), wheel_x, wheel_y);
         }
         public void ClearInputCharacters()
         {

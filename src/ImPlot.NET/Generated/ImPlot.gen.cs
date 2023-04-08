@@ -1409,21 +1409,24 @@ namespace ImPlotNET
         }
         public static ImPlotRect GetPlotLimits()
         {
+            ImPlotRect __retval;
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotLimits(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotLimits(ImAxis x_axis)
         {
+            ImPlotRect __retval;
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotLimits(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotLimits(ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
-            return ret;
+            ImPlotRect __retval;
+            ImPlotNative.ImPlot_GetPlotLimits(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotPoint GetPlotMousePos()
         {
@@ -1454,21 +1457,24 @@ namespace ImPlotNET
         }
         public static ImPlotRect GetPlotSelection()
         {
+            ImPlotRect __retval;
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotSelection(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotSelection(ImAxis x_axis)
         {
+            ImPlotRect __retval;
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotSelection(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotSelection(ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
-            return ret;
+            ImPlotRect __retval;
+            ImPlotNative.ImPlot_GetPlotSelection(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static Vector2 GetPlotSize()
         {

@@ -77,7 +77,7 @@ namespace ImGui.NET.SampleProgram
 
         public void Dispose()
         {
-            _gd.WaitForIdle(); // TODO: Shouldn't be necessary, but Vulkan backend trips a validation error (swapchain in use when disposed).
+            //_gd.WaitForIdle(); // TODO: Shouldn't be necessary, but Vulkan backend trips a validation error (swapchain in use when disposed).
             _sc.Dispose();
             _window.Close();
             _gcHandle.Free();

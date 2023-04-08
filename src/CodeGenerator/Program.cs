@@ -22,7 +22,7 @@ namespace CodeGenerator
             }
             else
             {
-                outputPath = AppContext.BaseDirectory;
+                outputPath = Path.Combine(AppContext.BaseDirectory, "generated");
             }
 
             if (!Directory.Exists(outputPath))
@@ -75,7 +75,7 @@ namespace CodeGenerator
                 "cimguizmo" => "cimguizmo",
                 _ => throw new NotImplementedException()
             };
-            
+
             string definitionsPath = Path.Combine(AppContext.BaseDirectory, "definitions", libraryName);
             var defs = new ImguiDefinitions();
             defs.LoadFrom(definitionsPath);
@@ -477,7 +477,7 @@ namespace CodeGenerator
                 if (tr.Name == "self")
                 {
                     selfIndex = i;
-                    continue; 
+                    continue;
                 }
                 if (tr.Name == "...") { continue; }
 
@@ -622,7 +622,7 @@ namespace CodeGenerator
                     marshalledParameters[i] = new MarshalledParameter(wrappedParamType, false, nativeArgName, false);
                     preCallLines.Add($"{tr.Type} {nativeArgName} = {correctedIdentifier}.NativePtr;");
                 }
-                else if ((tr.Type.EndsWith("*") || tr.Type.Contains("[") || tr.Type.EndsWith("&")) && tr.Type != "void*" && tr.Type != "ImGuiContext*" && tr.Type != "ImPlotContext*"&& tr.Type != "EditorContext*")
+                else if ((tr.Type.EndsWith("*") || tr.Type.Contains("[") || tr.Type.EndsWith("&")) && tr.Type != "void*" && tr.Type != "ImGuiContext*" && tr.Type != "ImPlotContext*" && tr.Type != "EditorContext*")
                 {
                     string nonPtrType;
                     if (tr.Type.Contains("["))
@@ -733,7 +733,7 @@ namespace CodeGenerator
 
             if (overrideRet != null)
                 writer.WriteLine("return __retval;");
-            
+
             for (int i = 0; i < marshalledParameters.Length; i++)
             {
                 MarshalledParameter mp = marshalledParameters[i];

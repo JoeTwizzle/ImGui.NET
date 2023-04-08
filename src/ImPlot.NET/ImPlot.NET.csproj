@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>A .NET wrapper for the ImPlot library.</Description>
-    <AssemblyVersion>0.8.0</AssemblyVersion>
+    <AssemblyVersion>1.89.4</AssemblyVersion>
     <Authors>Eric Mellino, Joe Twizzle</Authors>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <AssemblyName>ImPlot.NET</AssemblyName>
@@ -14,11 +14,15 @@
     <PackageProjectUrl>https://github.com/mellinoe/imgui.net</PackageProjectUrl>
     <DocumentationFile Condition="'$(Configuration)' == 'Release'">$(OutputPath)\ImPlot.NET.xml</DocumentationFile>
     <RootNamespace>ImPlotNET</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.4.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.4.0" />
     <PackageReference Include="System.Buffers" Version="4.4.0" />
+    <PackageReference Include="Twizzle.ImGui.NET" Version="1.89.4" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\deps\cimplot\win-x86\cimplot.dll">
@@ -26,6 +30,14 @@
       <Pack>true</Pack>
     </Content>
     <Content Include="..\..\deps\cimplot\win-x64\cimplot.dll">
+      <PackagePath>runtimes/win-x64/native</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="..\..\deps\cimplot\win-x86\cimplot.pdb">
+      <PackagePath>runtimes/win-x86/native</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="..\..\deps\cimplot\win-x64\cimplot.pdb">
       <PackagePath>runtimes/win-x64/native</PackagePath>
       <Pack>true</Pack>
     </Content>
@@ -37,5 +49,15 @@
       <PackagePath>runtimes/osx/native/libcimplot.dylib</PackagePath>
       <Pack>true</Pack>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>
