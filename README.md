@@ -6,7 +6,12 @@ Included is a basic sample program that shows how to use the library, and render
 
 This wrapper is built on top of [cimgui](https://github.com/Extrawurst/cimgui), which exposes a plain C API for Dear ImGui. If you are using Windows, OSX, or a mainline Linux distribution, then the ImGui.NET NuGet package comes bundled with a pre-built native library. If you are using another operating system, then you may need to build the native library yourself; see the cimgui repo for build instructions.
 
-[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGui.NET)
+|    | Release |
+|:---|----------------:|
+|**ImGui.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGui.NET)|
+|**ImGuizmo.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGuizmo.NET)|
+|**ImNodes.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImNodes.NET)|
+|**ImPlot.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImPlot.NET)|
 
 # Building
 
