@@ -8,10 +8,10 @@ This wrapper is built on top of [cimgui](https://github.com/Extrawurst/cimgui), 
 
 |    | Release |
 |:---|----------------:|
-|**ImGui.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGui.NET)|
-|**ImGuizmo.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGuizmo.NET)|
-|**ImNodes.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImNodes.NET)|
-|**ImPlot.NET**|[![NuGet](https://img.shields.io/nuget/v/ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImPlot.NET)|
+|**ImGui.NET**|[![NuGet](https://img.shields.io/nuget/v/Twizzle.ImGui.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGui.NET)|
+|**ImGuizmo.NET**|[![NuGet](https://img.shields.io/nuget/v/Twizzle.ImGuizmo.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGuizmo.NET)|
+|**ImNodes.NET**|[![NuGet](https://img.shields.io/nuget/v/Twizzle.ImNodes.NET.svg)](https://www.nuget.org/packages/Twizzle.ImNodes.NET)|
+|**ImPlot.NET**|[![NuGet](https://img.shields.io/nuget/v/Twizzle.ImPlot.NET.svg)](https://www.nuget.org/packages/Twizzle.ImPlot.NET)|
 
 # Building
 
