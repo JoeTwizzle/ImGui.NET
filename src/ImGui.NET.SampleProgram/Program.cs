@@ -1,10 +1,10 @@
-﻿using ImPlotNET;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using System.Threading;
-using System.Xml.Linq;
+using ImPlotNET;
+using System.Runtime.CompilerServices;
+using TestDotNetStandardLib;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
@@ -41,7 +41,6 @@ namespace ImGuiNET
             VeldridStartup.CreateWindowAndGraphicsDevice(
                 new WindowCreateInfo(50, 50, 1280, 720, WindowState.Normal, "ImGui.NET Sample Program"),
                 new GraphicsDeviceOptions(true, null, true, ResourceBindingModel.Improved, true, true),
-                GraphicsBackend.Vulkan,
                 out _window,
                 out _gd);
             _window.Resized += () =>
@@ -50,21 +49,24 @@ namespace ImGuiNET
                 _controller.WindowResized(_window.Width, _window.Height);
             };
             _cl = _gd.ResourceFactory.CreateCommandList();
-            _controller = new ImGuiController(_gd, _window, _gd.MainSwapchain.Framebuffer.OutputDescription, _window.Width, _window.Height);
+            _controller = new ImGuiController(_gd, _gd.MainSwapchain.Framebuffer.OutputDescription, _window.Width, _window.Height);
             // _memoryEditor = new MemoryEditor();
             Random random = new Random();
             _memoryEditorData = Enumerable.Range(0, 1024).Select(i => (byte)random.Next(255)).ToArray();
-            _gd.SyncToVerticalBlank = false;
+
+            var stopwatch = Stopwatch.StartNew();
+            float deltaTime = 0f;
             // Main application loop
-            long prev = Stopwatch.GetTimestamp();
             while (_window.Exists)
             {
+                deltaTime = stopwatch.ElapsedTicks / (float)Stopwatch.Frequency;
+                stopwatch.Restart();
                 InputSnapshot snapshot = _window.PumpEvents();
                 if (!_window.Exists) { break; }
-                long current = Stopwatch.GetTimestamp();
-                _controller.Update((current - prev) * 1.0E-7f, snapshot); // Feed the input events to our ImGui controller, which passes them through to ImGui.
-                prev = current;
+                _controller.Update(deltaTime, snapshot); // Feed the input events to our ImGui controller, which passes them through to ImGui.
+
                 SubmitUI();
+
                 _cl.Begin();
                 _cl.SetFramebuffer(_gd.MainSwapchain.Framebuffer);
                 _cl.ClearColorTarget(0, new RgbaFloat(_clearColor.X, _clearColor.Y, _clearColor.Z, 1f));
@@ -72,8 +74,8 @@ namespace ImGuiNET
                 _cl.End();
                 _gd.SubmitCommands(_cl);
                 _gd.SwapBuffers(_gd.MainSwapchain);
-                _controller.SwapExtraWindows(_gd);
             }
+
             // Clean up Veldrid resources
             _gd.WaitForIdle();
             _controller.Dispose();
@@ -81,26 +83,21 @@ namespace ImGuiNET
             _gd.Dispose();
         }
 
-        const int maxPlotSize = 1000;
-
-        static float[] _frameTimes = new float[maxPlotSize];
-        static float[] _fps = new float[maxPlotSize];
-
-
         private static unsafe void SubmitUI()
         {
             // Demo code adapted from the official Dear ImGui demo program:
             // https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx11/main.cpp#L172
 
             // 1. Show a simple window.
-            // Tip: if we don't call ImGui.BeginWindow()/ImGui.EndWindow() the widgets automatically appears in a window called "Debug".
+            // Tip: if we don't call ImGui.Begin(string) / ImGui.End() the widgets automatically appears in a window called "Debug".
             {
+                ImGui.Text("");
+                ImGui.Text(string.Empty);
                 ImGui.Text("Hello, world!");                                        // Display some text (you can use a format string too)
                 ImGui.SliderFloat("float", ref _f, 0, 1, _f.ToString("0.000"));  // Edit 1 float using a slider from 0.0f to 1.0f    
                 //ImGui.ColorEdit3("clear color", ref _clearColor);                   // Edit 3 floats representing a color
 
                 ImGui.Text($"Mouse position: {ImGui.GetMousePos()}");
-                ImGui.Text($"Mouse down: {ImGui.GetIO().MouseDown[0]}");
 
                 ImGui.Checkbox("ImGui Demo Window", ref _showImGuiDemoWindow);                 // Edit bools storing our windows open/close state
                 ImGui.Checkbox("Another Window", ref _showAnotherWindow);
@@ -114,19 +111,6 @@ namespace ImGuiNET
 
                 float framerate = ImGui.GetIO().Framerate;
                 ImGui.Text($"Application average {1000.0f / framerate:0.##} ms/frame ({framerate:0.#} FPS)");
-
-                Array.Copy(_frameTimes, 1, _frameTimes, 0, maxPlotSize - 1);
-                Array.Copy(_fps, 1, _fps, 0, maxPlotSize - 1);
-                _frameTimes[maxPlotSize - 1] = 1000.0f / framerate;
-                _fps[maxPlotSize - 1] = framerate;
-
-                // Plot frametime using ImPlot
-                if (ImPlot.BeginPlot("Frametime plot"))
-                {
-                    ImPlot.PlotLine("Frame time", ref _frameTimes[0], 1000);
-                    ImPlot.PlotLine("Frames per second", ref _fps[0], 1000);
-                    ImPlot.EndPlot();
-                }
             }
 
             // 2. Show another simple window. In most cases you will use an explicit Begin/End pair to name your windows.
@@ -147,7 +131,7 @@ namespace ImGuiNET
                 ImGui.SetNextWindowPos(new Vector2(650, 20), ImGuiCond.FirstUseEver);
                 ImGui.ShowDemoWindow(ref _showImGuiDemoWindow);
             }
-
+            
             if (ImGui.TreeNode("Tabs"))
             {
                 if (ImGui.TreeNode("Basic"))
@@ -225,6 +209,28 @@ namespace ImGuiNET
                 ImGui.Text("Memory editor currently supported.");
                 // _memoryEditor.Draw("Memory Editor", _memoryEditorData, _memoryEditorData.Length);
             }
+            
+            // ReadOnlySpan<char> and .NET Standard 2.0 tests
+            TestStringParameterOnDotNetStandard.Text(); // String overloads should always be available.
+            
+            // On .NET Standard 2.1 or greater, you can use ReadOnlySpan<char> instead of string to prevent allocations.
+            long allocBytesStringStart = GC.GetAllocatedBytesForCurrentThread();
+            ImGui.Text($"Hello, world {Random.Shared.Next(100)}!");
+            long allocBytesStringEnd = GC.GetAllocatedBytesForCurrentThread() - allocBytesStringStart;
+            Console.WriteLine("GC (string): " + allocBytesStringEnd);
+                
+            long allocBytesSpanStart = GC.GetAllocatedBytesForCurrentThread();
+            ImGui.Text($"Hello, world {Random.Shared.Next(100)}!".AsSpan()); // Note that this call will STILL allocate memory due to string interpolation, but you can prevent that from happening by using an InterpolatedStringHandler.
+            long allocBytesSpanEnd = GC.GetAllocatedBytesForCurrentThread() - allocBytesSpanStart;
+            Console.WriteLine("GC (span): " + allocBytesSpanEnd);
+            
+            ImGui.Text("Empty span:");
+            ImGui.SameLine();
+            ImGui.GetWindowDrawList().AddText(ImGui.GetCursorScreenPos(), uint.MaxValue, ReadOnlySpan<char>.Empty);
+            ImGui.NewLine();
+            ImGui.GetWindowDrawList().AddText(ImGui.GetCursorScreenPos(), uint.MaxValue, $"{ImGui.CalcTextSize("h")}");
+            ImGui.NewLine();
+            ImGui.TextUnformatted("TextUnformatted now passes end ptr but isn't cut off");
         }
     }
 }

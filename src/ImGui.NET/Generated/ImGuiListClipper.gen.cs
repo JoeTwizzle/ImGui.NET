@@ -13,6 +13,7 @@ namespace ImGuiNET
         public int ItemsCount;
         public float ItemsHeight;
         public float StartPosY;
+        public double StartSeekOffsetY;
         public void* TempData;
     }
     public unsafe partial struct ImGuiListClipperPtr
@@ -29,6 +30,7 @@ namespace ImGuiNET
         public ref int ItemsCount => ref Unsafe.AsRef<int>(&NativePtr->ItemsCount);
         public ref float ItemsHeight => ref Unsafe.AsRef<float>(&NativePtr->ItemsHeight);
         public ref float StartPosY => ref Unsafe.AsRef<float>(&NativePtr->StartPosY);
+        public ref double StartSeekOffsetY => ref Unsafe.AsRef<double>(&NativePtr->StartSeekOffsetY);
         public IntPtr TempData { get => (IntPtr)NativePtr->TempData; set => NativePtr->TempData = (void*)value; }
         public void Begin(int items_count)
         {
@@ -47,9 +49,13 @@ namespace ImGuiNET
         {
             ImGuiNative.ImGuiListClipper_End((ImGuiListClipper*)(NativePtr));
         }
-        public void ForceDisplayRangeByIndices(int item_min, int item_max)
+        public void IncludeItemByIndex(int item_index)
         {
-            ImGuiNative.ImGuiListClipper_ForceDisplayRangeByIndices((ImGuiListClipper*)(NativePtr), item_min, item_max);
+            ImGuiNative.ImGuiListClipper_IncludeItemByIndex((ImGuiListClipper*)(NativePtr), item_index);
+        }
+        public void SeekCursorForItem(int item_index)
+        {
+            ImGuiNative.ImGuiListClipper_SeekCursorForItem((ImGuiListClipper*)(NativePtr), item_index);
         }
         public bool Step()
         {

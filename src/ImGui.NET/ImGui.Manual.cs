@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace ImGuiNET
@@ -355,17 +354,11 @@ namespace ImGuiNET
             return result != 0;
         }
 
-        public static Vector2 CalcTextSize(string text)
-            => CalcTextSizeImpl(text);
-
         public static Vector2 CalcTextSize(string text, int start)
             => CalcTextSizeImpl(text, start);
 
         public static Vector2 CalcTextSize(string text, float wrapWidth)
             => CalcTextSizeImpl(text, wrapWidth: wrapWidth);
-
-        public static Vector2 CalcTextSize(string text, bool hideTextAfterDoubleHash)
-            => CalcTextSizeImpl(text, hideTextAfterDoubleHash: hideTextAfterDoubleHash);
 
         public static Vector2 CalcTextSize(string text, int start, int length)
             => CalcTextSizeImpl(text, start, length);
@@ -375,9 +368,6 @@ namespace ImGuiNET
 
         public static Vector2 CalcTextSize(string text, int start, float wrapWidth)
             => CalcTextSizeImpl(text, start, wrapWidth: wrapWidth);
-
-        public static Vector2 CalcTextSize(string text, bool hideTextAfterDoubleHash, float wrapWidth)
-            => CalcTextSizeImpl(text, hideTextAfterDoubleHash: hideTextAfterDoubleHash, wrapWidth: wrapWidth);
 
         public static Vector2 CalcTextSize(string text, int start, int length, bool hideTextAfterDoubleHash)
             => CalcTextSizeImpl(text, start, length, hideTextAfterDoubleHash);
@@ -395,37 +385,7 @@ namespace ImGuiNET
             bool hideTextAfterDoubleHash = false,
             float wrapWidth = -1.0f)
         {
-            Vector2 ret;
-            byte* nativeTextStart = null;
-            byte* nativeTextEnd = null;
-            int textByteCount = 0;
-            if (text != null)
-            {
-
-                int textToCopyLen = length.HasValue ? length.Value : text.Length;
-                textByteCount = Util.CalcSizeInUtf8(text, start, textToCopyLen);
-                if (textByteCount > Util.StackAllocationSizeLimit)
-                {
-                    nativeTextStart = Util.Allocate(textByteCount + 1);
-                }
-                else
-                {
-                    byte* nativeTextStackBytes = stackalloc byte[textByteCount + 1];
-                    nativeTextStart = nativeTextStackBytes;
-                }
-
-                int nativeTextOffset = Util.GetUtf8(text, start, textToCopyLen, nativeTextStart, textByteCount);
-                nativeTextStart[nativeTextOffset] = 0;
-                nativeTextEnd = nativeTextStart + nativeTextOffset;
-            }
-
-            ImGuiNative.igCalcTextSize(&ret, nativeTextStart, nativeTextEnd, *((byte*)(&hideTextAfterDoubleHash)), wrapWidth);
-            if (textByteCount > Util.StackAllocationSizeLimit)
-            {
-                Util.Free(nativeTextStart);
-            }
-
-            return ret;
+            return CalcTextSize(text.Substring(start, length ?? text.Length-start), hideTextAfterDoubleHash, wrapWidth);
         }
 
         public static bool InputText(
@@ -515,6 +475,36 @@ namespace ImGuiNET
         public static bool MenuItem(string label, bool enabled)
         {
             return MenuItem(label, string.Empty, false, enabled);
+        }
+
+        public static bool BeginPopupModal(string name, ImGuiWindowFlags flags)
+        {
+            byte* native_name;
+            int name_byteCount = 0;
+            if (name != null)
+            {
+                name_byteCount = Encoding.UTF8.GetByteCount(name);
+                if (name_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_name = Util.Allocate(name_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_name_stackBytes = stackalloc byte[name_byteCount + 1];
+                    native_name = native_name_stackBytes;
+                }
+                int native_name_offset = Util.GetUtf8(name, native_name, name_byteCount);
+                native_name[native_name_offset] = 0;
+            }
+            else { native_name = null; }
+            byte* native_p_open = null;
+            byte ret = ImGuiNative.igBeginPopupModal(native_name, native_p_open, flags);
+            if (name_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_name);
+            }
+
+            return ret != 0;
         }
     }
 }

@@ -13,15 +13,15 @@ namespace ImGuiNET
         public ImDrawListFlags Flags;
         public uint _VtxCurrentIdx;
         public IntPtr _Data;
-        public byte* _OwnerName;
         public ImDrawVert* _VtxWritePtr;
         public ushort* _IdxWritePtr;
-        public ImVector _ClipRectStack;
-        public ImVector _TextureIdStack;
         public ImVector _Path;
         public ImDrawCmdHeader _CmdHeader;
         public ImDrawListSplitter _Splitter;
+        public ImVector _ClipRectStack;
+        public ImVector _TextureIdStack;
         public float _FringeScale;
+        public byte* _OwnerName;
     }
     public unsafe partial struct ImDrawListPtr
     {
@@ -37,15 +37,15 @@ namespace ImGuiNET
         public ref ImDrawListFlags Flags => ref Unsafe.AsRef<ImDrawListFlags>(&NativePtr->Flags);
         public ref uint _VtxCurrentIdx => ref Unsafe.AsRef<uint>(&NativePtr->_VtxCurrentIdx);
         public ref IntPtr _Data => ref Unsafe.AsRef<IntPtr>(&NativePtr->_Data);
-        public NullTerminatedString _OwnerName => new NullTerminatedString(NativePtr->_OwnerName);
         public ImDrawVertPtr _VtxWritePtr => new ImDrawVertPtr(NativePtr->_VtxWritePtr);
         public IntPtr _IdxWritePtr { get => (IntPtr)NativePtr->_IdxWritePtr; set => NativePtr->_IdxWritePtr = (ushort*)value; }
-        public ImVector<Vector4> _ClipRectStack => new ImVector<Vector4>(NativePtr->_ClipRectStack);
-        public ImVector<IntPtr> _TextureIdStack => new ImVector<IntPtr>(NativePtr->_TextureIdStack);
         public ImVector<Vector2> _Path => new ImVector<Vector2>(NativePtr->_Path);
         public ref ImDrawCmdHeader _CmdHeader => ref Unsafe.AsRef<ImDrawCmdHeader>(&NativePtr->_CmdHeader);
         public ref ImDrawListSplitter _Splitter => ref Unsafe.AsRef<ImDrawListSplitter>(&NativePtr->_Splitter);
+        public ImVector<Vector4> _ClipRectStack => new ImVector<Vector4>(NativePtr->_ClipRectStack);
+        public ImVector<IntPtr> _TextureIdStack => new ImVector<IntPtr>(NativePtr->_TextureIdStack);
         public ref float _FringeScale => ref Unsafe.AsRef<float>(&NativePtr->_FringeScale);
+        public NullTerminatedString _OwnerName => new NullTerminatedString(NativePtr->_OwnerName);
         public int _CalcCircleAutoSegmentCount(float radius)
         {
             int ret = ImGuiNative.ImDrawList__CalcCircleAutoSegmentCount((ImDrawList*)(NativePtr), radius);
@@ -134,6 +134,13 @@ namespace ImGuiNET
         {
             ImGuiNative.ImDrawList_AddCircleFilled((ImDrawList*)(NativePtr), center, radius, col, num_segments);
         }
+        public void AddConcavePolyFilled(ref Vector2 points, int num_points, uint col)
+        {
+            fixed (Vector2* native_points = &points)
+            {
+                ImGuiNative.ImDrawList_AddConcavePolyFilled((ImDrawList*)(NativePtr), native_points, num_points, col);
+            }
+        }
         public void AddConvexPolyFilled(ref Vector2 points, int num_points, uint col)
         {
             fixed (Vector2* native_points = &points)
@@ -144,6 +151,43 @@ namespace ImGuiNET
         public void AddDrawCmd()
         {
             ImGuiNative.ImDrawList_AddDrawCmd((ImDrawList*)(NativePtr));
+        }
+        public void AddEllipse(Vector2 center, Vector2 radius, uint col)
+        {
+            float rot = 0.0f;
+            int num_segments = 0;
+            float thickness = 1.0f;
+            ImGuiNative.ImDrawList_AddEllipse((ImDrawList*)(NativePtr), center, radius, col, rot, num_segments, thickness);
+        }
+        public void AddEllipse(Vector2 center, Vector2 radius, uint col, float rot)
+        {
+            int num_segments = 0;
+            float thickness = 1.0f;
+            ImGuiNative.ImDrawList_AddEllipse((ImDrawList*)(NativePtr), center, radius, col, rot, num_segments, thickness);
+        }
+        public void AddEllipse(Vector2 center, Vector2 radius, uint col, float rot, int num_segments)
+        {
+            float thickness = 1.0f;
+            ImGuiNative.ImDrawList_AddEllipse((ImDrawList*)(NativePtr), center, radius, col, rot, num_segments, thickness);
+        }
+        public void AddEllipse(Vector2 center, Vector2 radius, uint col, float rot, int num_segments, float thickness)
+        {
+            ImGuiNative.ImDrawList_AddEllipse((ImDrawList*)(NativePtr), center, radius, col, rot, num_segments, thickness);
+        }
+        public void AddEllipseFilled(Vector2 center, Vector2 radius, uint col)
+        {
+            float rot = 0.0f;
+            int num_segments = 0;
+            ImGuiNative.ImDrawList_AddEllipseFilled((ImDrawList*)(NativePtr), center, radius, col, rot, num_segments);
+        }
+        public void AddEllipseFilled(Vector2 center, Vector2 radius, uint col, float rot)
+        {
+            int num_segments = 0;
+            ImGuiNative.ImDrawList_AddEllipseFilled((ImDrawList*)(NativePtr), center, radius, col, rot, num_segments);
+        }
+        public void AddEllipseFilled(Vector2 center, Vector2 radius, uint col, float rot, int num_segments)
+        {
+            ImGuiNative.ImDrawList_AddEllipseFilled((ImDrawList*)(NativePtr), center, radius, col, rot, num_segments);
         }
         public void AddImage(IntPtr user_texture_id, Vector2 p_min, Vector2 p_max)
         {
@@ -298,6 +342,208 @@ namespace ImGuiNET
         {
             ImGuiNative.ImDrawList_AddRectFilledMultiColor((ImDrawList*)(NativePtr), p_min, p_max, col_upr_left, col_upr_right, col_bot_right, col_bot_left);
         }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
+        public void AddText(Vector2 pos, uint col, ReadOnlySpan<char> text_begin)
+        {
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            ImGuiNative.ImDrawList_AddText_Vec2((ImDrawList*)(NativePtr), pos, col, native_text_begin, native_text_begin+text_begin_byteCount);
+            if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text_begin);
+            }
+        }
+#endif
+        public void AddText(Vector2 pos, uint col, string text_begin)
+        {
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            ImGuiNative.ImDrawList_AddText_Vec2((ImDrawList*)(NativePtr), pos, col, native_text_begin, native_text_begin+text_begin_byteCount);
+            if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text_begin);
+            }
+        }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
+        public void AddText(ImFontPtr font, float font_size, Vector2 pos, uint col, ReadOnlySpan<char> text_begin)
+        {
+            ImFont* native_font = font.NativePtr;
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            float wrap_width = 0.0f;
+            Vector4* cpu_fine_clip_rect = null;
+            ImGuiNative.ImDrawList_AddText_FontPtr((ImDrawList*)(NativePtr), native_font, font_size, pos, col, native_text_begin, native_text_begin+text_begin_byteCount, wrap_width, cpu_fine_clip_rect);
+            if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text_begin);
+            }
+        }
+#endif
+        public void AddText(ImFontPtr font, float font_size, Vector2 pos, uint col, string text_begin)
+        {
+            ImFont* native_font = font.NativePtr;
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            float wrap_width = 0.0f;
+            Vector4* cpu_fine_clip_rect = null;
+            ImGuiNative.ImDrawList_AddText_FontPtr((ImDrawList*)(NativePtr), native_font, font_size, pos, col, native_text_begin, native_text_begin+text_begin_byteCount, wrap_width, cpu_fine_clip_rect);
+            if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text_begin);
+            }
+        }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
+        public void AddText(ImFontPtr font, float font_size, Vector2 pos, uint col, ReadOnlySpan<char> text_begin, float wrap_width)
+        {
+            ImFont* native_font = font.NativePtr;
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            Vector4* cpu_fine_clip_rect = null;
+            ImGuiNative.ImDrawList_AddText_FontPtr((ImDrawList*)(NativePtr), native_font, font_size, pos, col, native_text_begin, native_text_begin+text_begin_byteCount, wrap_width, cpu_fine_clip_rect);
+            if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text_begin);
+            }
+        }
+#endif
+        public void AddText(ImFontPtr font, float font_size, Vector2 pos, uint col, string text_begin, float wrap_width)
+        {
+            ImFont* native_font = font.NativePtr;
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            Vector4* cpu_fine_clip_rect = null;
+            ImGuiNative.ImDrawList_AddText_FontPtr((ImDrawList*)(NativePtr), native_font, font_size, pos, col, native_text_begin, native_text_begin+text_begin_byteCount, wrap_width, cpu_fine_clip_rect);
+            if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+            {
+                Util.Free(native_text_begin);
+            }
+        }
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
+        public void AddText(ImFontPtr font, float font_size, Vector2 pos, uint col, ReadOnlySpan<char> text_begin, float wrap_width, ref Vector4 cpu_fine_clip_rect)
+        {
+            ImFont* native_font = font.NativePtr;
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            fixed (Vector4* native_cpu_fine_clip_rect = &cpu_fine_clip_rect)
+            {
+                ImGuiNative.ImDrawList_AddText_FontPtr((ImDrawList*)(NativePtr), native_font, font_size, pos, col, native_text_begin, native_text_begin+text_begin_byteCount, wrap_width, native_cpu_fine_clip_rect);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    Util.Free(native_text_begin);
+                }
+            }
+        }
+#endif
+        public void AddText(ImFontPtr font, float font_size, Vector2 pos, uint col, string text_begin, float wrap_width, ref Vector4 cpu_fine_clip_rect)
+        {
+            ImFont* native_font = font.NativePtr;
+            byte* native_text_begin;
+            int text_begin_byteCount = 0;
+                text_begin_byteCount = Encoding.UTF8.GetByteCount(text_begin);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    native_text_begin = Util.Allocate(text_begin_byteCount + 1);
+                }
+                else
+                {
+                    byte* native_text_begin_stackBytes = stackalloc byte[text_begin_byteCount + 1];
+                    native_text_begin = native_text_begin_stackBytes;
+                }
+                int native_text_begin_offset = Util.GetUtf8(text_begin, native_text_begin, text_begin_byteCount);
+                native_text_begin[native_text_begin_offset] = 0;
+            fixed (Vector4* native_cpu_fine_clip_rect = &cpu_fine_clip_rect)
+            {
+                ImGuiNative.ImDrawList_AddText_FontPtr((ImDrawList*)(NativePtr), native_font, font_size, pos, col, native_text_begin, native_text_begin+text_begin_byteCount, wrap_width, native_cpu_fine_clip_rect);
+                if (text_begin_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    Util.Free(native_text_begin);
+                }
+            }
+        }
         public void AddTriangle(Vector2 p1, Vector2 p2, Vector2 p3, uint col)
         {
             float thickness = 1.0f;
@@ -378,6 +624,19 @@ namespace ImGuiNET
         public void PathClear()
         {
             ImGuiNative.ImDrawList_PathClear((ImDrawList*)(NativePtr));
+        }
+        public void PathEllipticalArcTo(Vector2 center, Vector2 radius, float rot, float a_min, float a_max)
+        {
+            int num_segments = 0;
+            ImGuiNative.ImDrawList_PathEllipticalArcTo((ImDrawList*)(NativePtr), center, radius, rot, a_min, a_max, num_segments);
+        }
+        public void PathEllipticalArcTo(Vector2 center, Vector2 radius, float rot, float a_min, float a_max, int num_segments)
+        {
+            ImGuiNative.ImDrawList_PathEllipticalArcTo((ImDrawList*)(NativePtr), center, radius, rot, a_min, a_max, num_segments);
+        }
+        public void PathFillConcave(uint col)
+        {
+            ImGuiNative.ImDrawList_PathFillConcave((ImDrawList*)(NativePtr), col);
         }
         public void PathFillConvex(uint col)
         {

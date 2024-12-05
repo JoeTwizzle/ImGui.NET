@@ -64,19 +64,14 @@ namespace ImGuizmoNET
             byte native_enable = enable ? (byte)1 : (byte)0;
             ImGuizmoNative.ImGuizmo_Enable(native_enable);
         }
-        public static Style* GetStyle()
-        {
-            Style* ret = ImGuizmoNative.ImGuizmo_GetStyle();
-            return ret;
-        }
         public static bool IsOver()
         {
-            byte ret = ImGuizmoNative.ImGuizmo_IsOver_Nil();
+            byte ret = ImGuizmoNative.ImGuizmo_IsOverNil();
             return ret != 0;
         }
         public static bool IsOver(OPERATION op)
         {
-            byte ret = ImGuizmoNative.ImGuizmo_IsOver_OPERATION(op);
+            byte ret = ImGuizmoNative.ImGuizmo_IsOverOPERATION(op);
             return ret != 0;
         }
         public static bool IsUsing()
@@ -245,20 +240,7 @@ namespace ImGuizmoNET
         {
             fixed (float* native_view = &view)
             {
-                ImGuizmoNative.ImGuizmo_ViewManipulate_Float(native_view, length, position, size, backgroundColor);
-            }
-        }
-        public static void ViewManipulate(ref float view, ref float projection, OPERATION operation, MODE mode, ref float matrix, float length, Vector2 position, Vector2 size, uint backgroundColor)
-        {
-            fixed (float* native_view = &view)
-            {
-                fixed (float* native_projection = &projection)
-                {
-                    fixed (float* native_matrix = &matrix)
-                    {
-                        ImGuizmoNative.ImGuizmo_ViewManipulate_FloatPtr(native_view, native_projection, operation, mode, native_matrix, length, position, size, backgroundColor);
-                    }
-                }
+                ImGuizmoNative.ImGuizmo_ViewManipulate(native_view, length, position, size, backgroundColor);
             }
         }
     }
