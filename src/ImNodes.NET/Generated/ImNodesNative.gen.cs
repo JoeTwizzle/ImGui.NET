@@ -3,7 +3,7 @@ using System.Numerics;
 using System.Runtime.InteropServices;
 using ImGuiNET;
 
-namespace imnodesNET
+namespace ImNodesNET
 {
     public static unsafe partial class imnodesNative
     {
@@ -12,7 +12,7 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern EmulateThreeButtonMouse* EmulateThreeButtonMouse_EmulateThreeButtonMouse();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_BeginInputAttribute(int id, PinShape shape);
+        public static extern void imnodes_BeginInputAttribute(int id, ImNodesPinShape shape);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_BeginNode(int id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -20,13 +20,21 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_BeginNodeTitleBar();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_BeginOutputAttribute(int id, PinShape shape);
+        public static extern void imnodes_BeginOutputAttribute(int id, ImNodesPinShape shape);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_BeginStaticAttribute(int id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_ClearLinkSelection();
+        public static extern void imnodes_ClearLinkSelection_Nil();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_ClearNodeSelection();
+        public static extern void imnodes_ClearLinkSelection_Int(int link_id);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_ClearNodeSelection_Nil();
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_ClearNodeSelection_Int(int node_id);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr imnodes_CreateContext();
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_DestroyContext(IntPtr ctx);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr imnodes_EditorContextCreate();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -52,7 +60,9 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_EndStaticAttribute();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IO* imnodes_GetIO();
+        public static extern IntPtr imnodes_GetCurrentContext();
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern ImNodesIO* imnodes_GetIO();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_GetNodeDimensions(Vector2* pOut, int id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -66,9 +76,7 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_GetSelectedNodes(int* node_ids);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Style* imnodes_GetStyle();
-        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_Initialize();
+        public static extern ImNodesStyle* imnodes_GetStyle();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte imnodes_IsAnyAttributeActive(int* attribute_id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -76,9 +84,9 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte imnodes_IsEditorHovered();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte imnodes_IsLinkCreatedBoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, byte* created_from_snap);
+        public static extern byte imnodes_IsLinkCreated_BoolPtr(int* started_at_attribute_id, int* ended_at_attribute_id, byte* created_from_snap);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte imnodes_IsLinkCreatedIntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, byte* created_from_snap);
+        public static extern byte imnodes_IsLinkCreated_IntPtr(int* started_at_node_id, int* started_at_attribute_id, int* ended_at_node_id, int* ended_at_attribute_id, byte* created_from_snap);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte imnodes_IsLinkDestroyed(int* link_id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -86,9 +94,13 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte imnodes_IsLinkHovered(int* link_id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte imnodes_IsLinkSelected(int link_id);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte imnodes_IsLinkStarted(int* started_at_attribute_id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte imnodes_IsNodeHovered(int* node_id);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte imnodes_IsNodeSelected(int node_id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte imnodes_IsPinHovered(int* attribute_id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -102,6 +114,8 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_LoadEditorStateFromIniString(IntPtr editor, byte* data, uint data_size);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_MiniMap(float minimap_size_fraction, ImNodesMiniMapLocation location, void* node_hovering_callback, void* node_hovering_callback_data);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern int imnodes_NumSelectedLinks();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern int imnodes_NumSelectedNodes();
@@ -110,13 +124,15 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_PopColorStyle();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_PopStyleVar();
+        public static extern void imnodes_PopStyleVar(int count);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_PushAttributeFlag(AttributeFlags flag);
+        public static extern void imnodes_PushAttributeFlag(ImNodesAttributeFlags flag);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_PushColorStyle(ColorStyle item, uint color);
+        public static extern void imnodes_PushColorStyle(ImNodesCol item, uint color);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_PushStyleVar(StyleVar style_item, float value);
+        public static extern void imnodes_PushStyleVar_Float(ImNodesStyleVar style_item, float value);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_PushStyleVar_Vec2(ImNodesStyleVar style_item, Vector2 value);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_SaveCurrentEditorStateToIniFile(byte* file_name);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -125,6 +141,12 @@ namespace imnodesNET
         public static extern void imnodes_SaveEditorStateToIniFile(IntPtr editor, byte* file_name);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte* imnodes_SaveEditorStateToIniString(IntPtr editor, uint* data_size);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_SelectLink(int link_id);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_SelectNode(int node_id);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void imnodes_SetCurrentContext(IntPtr ctx);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_SetImGuiContext(IntPtr ctx);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
@@ -136,24 +158,28 @@ namespace imnodesNET
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void imnodes_SetNodeScreenSpacePos(int node_id, Vector2 screen_space_pos);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_Shutdown();
+        public static extern void imnodes_SnapNodeToGrid(int node_id);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_StyleColorsClassic();
+        public static extern void imnodes_StyleColorsClassic(ImNodesStyle* dest);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_StyleColorsDark();
+        public static extern void imnodes_StyleColorsDark(ImNodesStyle* dest);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void imnodes_StyleColorsLight();
+        public static extern void imnodes_StyleColorsLight(ImNodesStyle* dest);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void IO_destroy(IO* self);
+        public static extern void ImNodesIO_destroy(ImNodesIO* self);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IO* IO_IO();
+        public static extern ImNodesIO* ImNodesIO_ImNodesIO();
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImNodesStyle_destroy(ImNodesStyle* self);
+        [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern ImNodesStyle* ImNodesStyle_ImNodesStyle();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern void LinkDetachWithModifierClick_destroy(LinkDetachWithModifierClick* self);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
         public static extern LinkDetachWithModifierClick* LinkDetachWithModifierClick_LinkDetachWithModifierClick();
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void Style_destroy(Style* self);
+        public static extern void MultipleSelectModifier_destroy(MultipleSelectModifier* self);
         [DllImport("cimnodes", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Style* Style_Style();
+        public static extern MultipleSelectModifier* MultipleSelectModifier_MultipleSelectModifier();
     }
 }

@@ -13,8 +13,13 @@ namespace ImGuizmoNET
         SCALE_Y = 256,
         SCALE_Z = 512,
         BOUNDS = 1024,
+        SCALE_XU = 2048,
+        SCALE_YU = 4096,
+        SCALE_ZU = 8192,
         TRANSLATE = 7,
         ROTATE = 120,
         SCALE = 896,
+        SCALEU = 14336,
+        UNIVERSAL = 14463,
     }
 }

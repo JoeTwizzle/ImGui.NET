@@ -9,16 +9,16 @@ namespace ImPlotNET
     public unsafe partial struct ImPlotInputMap
     {
         public ImGuiMouseButton Pan;
-        public ImGuiModFlags PanMod;
+        public int PanMod;
         public ImGuiMouseButton Fit;
         public ImGuiMouseButton Select;
         public ImGuiMouseButton SelectCancel;
-        public ImGuiModFlags SelectMod;
-        public ImGuiModFlags SelectHorzMod;
-        public ImGuiModFlags SelectVertMod;
+        public int SelectMod;
+        public int SelectHorzMod;
+        public int SelectVertMod;
         public ImGuiMouseButton Menu;
-        public ImGuiModFlags OverrideMod;
-        public ImGuiModFlags ZoomMod;
+        public int OverrideMod;
+        public int ZoomMod;
         public float ZoomRate;
     }
     public unsafe partial struct ImPlotInputMapPtr
@@ -30,16 +30,16 @@ namespace ImPlotNET
         public static implicit operator ImPlotInputMap* (ImPlotInputMapPtr wrappedPtr) => wrappedPtr.NativePtr;
         public static implicit operator ImPlotInputMapPtr(IntPtr nativePtr) => new ImPlotInputMapPtr(nativePtr);
         public ref ImGuiMouseButton Pan => ref Unsafe.AsRef<ImGuiMouseButton>(&NativePtr->Pan);
-        public ref ImGuiModFlags PanMod => ref Unsafe.AsRef<ImGuiModFlags>(&NativePtr->PanMod);
+        public ref int PanMod => ref Unsafe.AsRef<int>(&NativePtr->PanMod);
         public ref ImGuiMouseButton Fit => ref Unsafe.AsRef<ImGuiMouseButton>(&NativePtr->Fit);
         public ref ImGuiMouseButton Select => ref Unsafe.AsRef<ImGuiMouseButton>(&NativePtr->Select);
         public ref ImGuiMouseButton SelectCancel => ref Unsafe.AsRef<ImGuiMouseButton>(&NativePtr->SelectCancel);
-        public ref ImGuiModFlags SelectMod => ref Unsafe.AsRef<ImGuiModFlags>(&NativePtr->SelectMod);
-        public ref ImGuiModFlags SelectHorzMod => ref Unsafe.AsRef<ImGuiModFlags>(&NativePtr->SelectHorzMod);
-        public ref ImGuiModFlags SelectVertMod => ref Unsafe.AsRef<ImGuiModFlags>(&NativePtr->SelectVertMod);
+        public ref int SelectMod => ref Unsafe.AsRef<int>(&NativePtr->SelectMod);
+        public ref int SelectHorzMod => ref Unsafe.AsRef<int>(&NativePtr->SelectHorzMod);
+        public ref int SelectVertMod => ref Unsafe.AsRef<int>(&NativePtr->SelectVertMod);
         public ref ImGuiMouseButton Menu => ref Unsafe.AsRef<ImGuiMouseButton>(&NativePtr->Menu);
-        public ref ImGuiModFlags OverrideMod => ref Unsafe.AsRef<ImGuiModFlags>(&NativePtr->OverrideMod);
-        public ref ImGuiModFlags ZoomMod => ref Unsafe.AsRef<ImGuiModFlags>(&NativePtr->ZoomMod);
+        public ref int OverrideMod => ref Unsafe.AsRef<int>(&NativePtr->OverrideMod);
+        public ref int ZoomMod => ref Unsafe.AsRef<int>(&NativePtr->ZoomMod);
         public ref float ZoomRate => ref Unsafe.AsRef<float>(&NativePtr->ZoomRate);
         public void Destroy()
         {

@@ -4,16 +4,16 @@ using System.Runtime.InteropServices;
 using System.Text;
 using ImGuiNET;
 
-namespace imnodesNET
+namespace ImNodesNET
 {
-    public static unsafe partial class imnodes
+    public static unsafe partial class ImNodes
     {
         public static void BeginInputAttribute(int id)
         {
-            PinShape shape = PinShape.CircleFilled;
+            ImNodesPinShape shape = (ImNodesPinShape)ImNodesPinShape.CircleFilled;
             imnodesNative.imnodes_BeginInputAttribute(id, shape);
         }
-        public static void BeginInputAttribute(int id, PinShape shape)
+        public static void BeginInputAttribute(int id, ImNodesPinShape shape)
         {
             imnodesNative.imnodes_BeginInputAttribute(id, shape);
         }
@@ -31,10 +31,10 @@ namespace imnodesNET
         }
         public static void BeginOutputAttribute(int id)
         {
-            PinShape shape = PinShape.CircleFilled;
+            ImNodesPinShape shape = (ImNodesPinShape)ImNodesPinShape.CircleFilled;
             imnodesNative.imnodes_BeginOutputAttribute(id, shape);
         }
-        public static void BeginOutputAttribute(int id, PinShape shape)
+        public static void BeginOutputAttribute(int id, ImNodesPinShape shape)
         {
             imnodesNative.imnodes_BeginOutputAttribute(id, shape);
         }
@@ -44,20 +44,47 @@ namespace imnodesNET
         }
         public static void ClearLinkSelection()
         {
-            imnodesNative.imnodes_ClearLinkSelection();
+            imnodesNative.imnodes_ClearLinkSelection_Nil();
+        }
+        public static void ClearLinkSelection(int link_id)
+        {
+            imnodesNative.imnodes_ClearLinkSelection_Int(link_id);
         }
         public static void ClearNodeSelection()
         {
-            imnodesNative.imnodes_ClearNodeSelection();
+            imnodesNative.imnodes_ClearNodeSelection_Nil();
         }
-        public static IntPtr EditorContextCreate()
+        public static void ClearNodeSelection(int node_id)
+        {
+            imnodesNative.imnodes_ClearNodeSelection_Int(node_id);
+        }
+        public static ImNodesContextPtr CreateContext()
+        {
+            IntPtr ret = imnodesNative.imnodes_CreateContext();
+            return new ImNodesContextPtr(ret);
+        }
+        public static void DestroyContext(IntPtr ctx)
+        {
+            imnodesNative.imnodes_DestroyContext(ctx);
+        }        
+        public static void DestroyContext()
+        {
+            imnodesNative.imnodes_DestroyContext(IntPtr.Zero);
+        }
+        public static void DestroyContext(ImNodesContextPtr ctx)
+        {
+            IntPtr native_ctx = ctx.NativePtr;
+            imnodesNative.imnodes_DestroyContext(native_ctx);
+        }
+        public static ImNodesEditorContextPtr EditorContextCreate()
         {
             IntPtr ret = imnodesNative.imnodes_EditorContextCreate();
-            return ret;
+            return new ImNodesEditorContextPtr(ret);
         }
-        public static void EditorContextFree(IntPtr noname1)
+        public static void EditorContextFree(ImNodesEditorContextPtr noname1)
         {
-            imnodesNative.imnodes_EditorContextFree(noname1);
+            IntPtr native_noname1 = noname1.NativePtr;
+            imnodesNative.imnodes_EditorContextFree(native_noname1);
         }
         public static Vector2 EditorContextGetPanning()
         {
@@ -73,9 +100,10 @@ namespace imnodesNET
         {
             imnodesNative.imnodes_EditorContextResetPanning(pos);
         }
-        public static void EditorContextSet(IntPtr noname1)
+        public static void EditorContextSet(ImNodesEditorContextPtr noname1)
         {
-            imnodesNative.imnodes_EditorContextSet(noname1);
+            IntPtr native_noname1 = noname1.NativePtr;
+            imnodesNative.imnodes_EditorContextSet(native_noname1);
         }
         public static void EndInputAttribute()
         {
@@ -101,10 +129,15 @@ namespace imnodesNET
         {
             imnodesNative.imnodes_EndStaticAttribute();
         }
-        public static IO* GetIO()
+        public static ImNodesContextPtr GetCurrentContext()
         {
-            IO* ret = imnodesNative.imnodes_GetIO();
-            return ret;
+            IntPtr ret = imnodesNative.imnodes_GetCurrentContext();
+            return new ImNodesContextPtr(ret);
+        }
+        public static ImNodesIOPtr GetIO()
+        {
+            ImNodesIO* ret = imnodesNative.imnodes_GetIO();
+            return new ImNodesIOPtr(ret);
         }
         public static Vector2 GetNodeDimensions(int id)
         {
@@ -144,14 +177,10 @@ namespace imnodesNET
                 imnodesNative.imnodes_GetSelectedNodes(native_node_ids);
             }
         }
-        public static Style* GetStyle()
+        public static ImNodesStylePtr GetStyle()
         {
-            Style* ret = imnodesNative.imnodes_GetStyle();
-            return ret;
-        }
-        public static void Initialize()
-        {
-            imnodesNative.imnodes_Initialize();
+            ImNodesStyle* ret = imnodesNative.imnodes_GetStyle();
+            return new ImNodesStylePtr(ret);
         }
         public static bool IsAnyAttributeActive()
         {
@@ -184,7 +213,7 @@ namespace imnodesNET
             {
                 fixed (int* native_ended_at_attribute_id = &ended_at_attribute_id)
                 {
-                    byte ret = imnodesNative.imnodes_IsLinkCreatedBoolPtr(native_started_at_attribute_id, native_ended_at_attribute_id, created_from_snap);
+                    byte ret = imnodesNative.imnodes_IsLinkCreated_BoolPtr(native_started_at_attribute_id, native_ended_at_attribute_id, created_from_snap);
                     return ret != 0;
                 }
             }
@@ -197,7 +226,7 @@ namespace imnodesNET
             {
                 fixed (int* native_ended_at_attribute_id = &ended_at_attribute_id)
                 {
-                    byte ret = imnodesNative.imnodes_IsLinkCreatedBoolPtr(native_started_at_attribute_id, native_ended_at_attribute_id, native_created_from_snap);
+                    byte ret = imnodesNative.imnodes_IsLinkCreated_BoolPtr(native_started_at_attribute_id, native_ended_at_attribute_id, native_created_from_snap);
                     created_from_snap = native_created_from_snap_val != 0;
                     return ret != 0;
                 }
@@ -214,7 +243,7 @@ namespace imnodesNET
                     {
                         fixed (int* native_ended_at_attribute_id = &ended_at_attribute_id)
                         {
-                            byte ret = imnodesNative.imnodes_IsLinkCreatedIntPtr(native_started_at_node_id, native_started_at_attribute_id, native_ended_at_node_id, native_ended_at_attribute_id, created_from_snap);
+                            byte ret = imnodesNative.imnodes_IsLinkCreated_IntPtr(native_started_at_node_id, native_started_at_attribute_id, native_ended_at_node_id, native_ended_at_attribute_id, created_from_snap);
                             return ret != 0;
                         }
                     }
@@ -233,7 +262,7 @@ namespace imnodesNET
                     {
                         fixed (int* native_ended_at_attribute_id = &ended_at_attribute_id)
                         {
-                            byte ret = imnodesNative.imnodes_IsLinkCreatedIntPtr(native_started_at_node_id, native_started_at_attribute_id, native_ended_at_node_id, native_ended_at_attribute_id, native_created_from_snap);
+                            byte ret = imnodesNative.imnodes_IsLinkCreated_IntPtr(native_started_at_node_id, native_started_at_attribute_id, native_ended_at_node_id, native_ended_at_attribute_id, native_created_from_snap);
                             created_from_snap = native_created_from_snap_val != 0;
                             return ret != 0;
                         }
@@ -282,6 +311,11 @@ namespace imnodesNET
                 return ret != 0;
             }
         }
+        public static bool IsLinkSelected(int link_id)
+        {
+            byte ret = imnodesNative.imnodes_IsLinkSelected(link_id);
+            return ret != 0;
+        }
         public static bool IsLinkStarted(ref int started_at_attribute_id)
         {
             fixed (int* native_started_at_attribute_id = &started_at_attribute_id)
@@ -297,6 +331,11 @@ namespace imnodesNET
                 byte ret = imnodesNative.imnodes_IsNodeHovered(native_node_id);
                 return ret != 0;
             }
+        }
+        public static bool IsNodeSelected(int node_id)
+        {
+            byte ret = imnodesNative.imnodes_IsNodeSelected(node_id);
+            return ret != 0;
         }
         public static bool IsPinHovered(ref int attribute_id)
         {
@@ -419,8 +458,9 @@ namespace imnodesNET
             }
         }
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
-        public static void LoadEditorStateFromIniFile(IntPtr editor, ReadOnlySpan<char> file_name)
+        public static void LoadEditorStateFromIniFile(ImNodesEditorContextPtr editor, ReadOnlySpan<char> file_name)
         {
+            IntPtr native_editor = editor.NativePtr;
             byte* native_file_name;
             int file_name_byteCount = 0;
             if (file_name != null)
@@ -439,15 +479,16 @@ namespace imnodesNET
                 native_file_name[native_file_name_offset] = 0;
             }
             else { native_file_name = null; }
-            imnodesNative.imnodes_LoadEditorStateFromIniFile(editor, native_file_name);
+            imnodesNative.imnodes_LoadEditorStateFromIniFile(native_editor, native_file_name);
             if (file_name_byteCount > Util.StackAllocationSizeLimit)
             {
                 Util.Free(native_file_name);
             }
         }
 #endif
-        public static void LoadEditorStateFromIniFile(IntPtr editor, string file_name)
+        public static void LoadEditorStateFromIniFile(ImNodesEditorContextPtr editor, string file_name)
         {
+            IntPtr native_editor = editor.NativePtr;
             byte* native_file_name;
             int file_name_byteCount = 0;
             if (file_name != null)
@@ -466,15 +507,16 @@ namespace imnodesNET
                 native_file_name[native_file_name_offset] = 0;
             }
             else { native_file_name = null; }
-            imnodesNative.imnodes_LoadEditorStateFromIniFile(editor, native_file_name);
+            imnodesNative.imnodes_LoadEditorStateFromIniFile(native_editor, native_file_name);
             if (file_name_byteCount > Util.StackAllocationSizeLimit)
             {
                 Util.Free(native_file_name);
             }
         }
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
-        public static void LoadEditorStateFromIniString(IntPtr editor, ReadOnlySpan<char> data, uint data_size)
+        public static void LoadEditorStateFromIniString(ImNodesEditorContextPtr editor, ReadOnlySpan<char> data, uint data_size)
         {
+            IntPtr native_editor = editor.NativePtr;
             byte* native_data;
             int data_byteCount = 0;
             if (data != null)
@@ -493,15 +535,16 @@ namespace imnodesNET
                 native_data[native_data_offset] = 0;
             }
             else { native_data = null; }
-            imnodesNative.imnodes_LoadEditorStateFromIniString(editor, native_data, data_size);
+            imnodesNative.imnodes_LoadEditorStateFromIniString(native_editor, native_data, data_size);
             if (data_byteCount > Util.StackAllocationSizeLimit)
             {
                 Util.Free(native_data);
             }
         }
 #endif
-        public static void LoadEditorStateFromIniString(IntPtr editor, string data, uint data_size)
+        public static void LoadEditorStateFromIniString(ImNodesEditorContextPtr editor, string data, uint data_size)
         {
+            IntPtr native_editor = editor.NativePtr;
             byte* native_data;
             int data_byteCount = 0;
             if (data != null)
@@ -520,11 +563,41 @@ namespace imnodesNET
                 native_data[native_data_offset] = 0;
             }
             else { native_data = null; }
-            imnodesNative.imnodes_LoadEditorStateFromIniString(editor, native_data, data_size);
+            imnodesNative.imnodes_LoadEditorStateFromIniString(native_editor, native_data, data_size);
             if (data_byteCount > Util.StackAllocationSizeLimit)
             {
                 Util.Free(native_data);
             }
+        }
+        public static void MiniMap()
+        {
+            float minimap_size_fraction = 0.2f;
+            ImNodesMiniMapLocation location = ImNodesMiniMapLocation.TopLeft;
+            void* node_hovering_callback = null;
+            void* node_hovering_callback_data = null;
+            imnodesNative.imnodes_MiniMap(minimap_size_fraction, location, node_hovering_callback, node_hovering_callback_data);
+        }
+        public static void MiniMap(float minimap_size_fraction)
+        {
+            ImNodesMiniMapLocation location = ImNodesMiniMapLocation.TopLeft;
+            void* node_hovering_callback = null;
+            void* node_hovering_callback_data = null;
+            imnodesNative.imnodes_MiniMap(minimap_size_fraction, location, node_hovering_callback, node_hovering_callback_data);
+        }
+        public static void MiniMap(float minimap_size_fraction, ImNodesMiniMapLocation location)
+        {
+            void* node_hovering_callback = null;
+            void* node_hovering_callback_data = null;
+            imnodesNative.imnodes_MiniMap(minimap_size_fraction, location, node_hovering_callback, node_hovering_callback_data);
+        }
+        public static void MiniMap(float minimap_size_fraction, ImNodesMiniMapLocation location, void* node_hovering_callback)
+        {
+            void* node_hovering_callback_data = null;
+            imnodesNative.imnodes_MiniMap(minimap_size_fraction, location, node_hovering_callback, node_hovering_callback_data);
+        }
+        public static void MiniMap(float minimap_size_fraction, ImNodesMiniMapLocation location, void* node_hovering_callback, void* node_hovering_callback_data)
+        {
+            imnodesNative.imnodes_MiniMap(minimap_size_fraction, location, node_hovering_callback, node_hovering_callback_data);
         }
         public static int NumSelectedLinks()
         {
@@ -546,19 +619,28 @@ namespace imnodesNET
         }
         public static void PopStyleVar()
         {
-            imnodesNative.imnodes_PopStyleVar();
+            int count = 1;
+            imnodesNative.imnodes_PopStyleVar(count);
         }
-        public static void PushAttributeFlag(AttributeFlags flag)
+        public static void PopStyleVar(int count)
+        {
+            imnodesNative.imnodes_PopStyleVar(count);
+        }
+        public static void PushAttributeFlag(ImNodesAttributeFlags flag)
         {
             imnodesNative.imnodes_PushAttributeFlag(flag);
         }
-        public static void PushColorStyle(ColorStyle item, uint color)
+        public static void PushColorStyle(ImNodesCol item, uint color)
         {
             imnodesNative.imnodes_PushColorStyle(item, color);
         }
-        public static void PushStyleVar(StyleVar style_item, float value)
+        public static void PushStyleVar(ImNodesStyleVar style_item, float value)
         {
-            imnodesNative.imnodes_PushStyleVar(style_item, value);
+            imnodesNative.imnodes_PushStyleVar_Float(style_item, value);
+        }
+        public static void PushStyleVar(ImNodesStyleVar style_item, Vector2 value)
+        {
+            imnodesNative.imnodes_PushStyleVar_Vec2(style_item, value);
         }
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
         public static void SaveCurrentEditorStateToIniFile(ReadOnlySpan<char> file_name)
@@ -629,8 +711,9 @@ namespace imnodesNET
             }
         }
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
-        public static void SaveEditorStateToIniFile(IntPtr editor, ReadOnlySpan<char> file_name)
+        public static void SaveEditorStateToIniFile(ImNodesEditorContextPtr editor, ReadOnlySpan<char> file_name)
         {
+            IntPtr native_editor = editor.NativePtr;
             byte* native_file_name;
             int file_name_byteCount = 0;
             if (file_name != null)
@@ -649,15 +732,16 @@ namespace imnodesNET
                 native_file_name[native_file_name_offset] = 0;
             }
             else { native_file_name = null; }
-            imnodesNative.imnodes_SaveEditorStateToIniFile(editor, native_file_name);
+            imnodesNative.imnodes_SaveEditorStateToIniFile(native_editor, native_file_name);
             if (file_name_byteCount > Util.StackAllocationSizeLimit)
             {
                 Util.Free(native_file_name);
             }
         }
 #endif
-        public static void SaveEditorStateToIniFile(IntPtr editor, string file_name)
+        public static void SaveEditorStateToIniFile(ImNodesEditorContextPtr editor, string file_name)
         {
+            IntPtr native_editor = editor.NativePtr;
             byte* native_file_name;
             int file_name_byteCount = 0;
             if (file_name != null)
@@ -676,25 +760,40 @@ namespace imnodesNET
                 native_file_name[native_file_name_offset] = 0;
             }
             else { native_file_name = null; }
-            imnodesNative.imnodes_SaveEditorStateToIniFile(editor, native_file_name);
+            imnodesNative.imnodes_SaveEditorStateToIniFile(native_editor, native_file_name);
             if (file_name_byteCount > Util.StackAllocationSizeLimit)
             {
                 Util.Free(native_file_name);
             }
         }
-        public static string SaveEditorStateToIniString(IntPtr editor)
+        public static string SaveEditorStateToIniString(ImNodesEditorContextPtr editor)
         {
+            IntPtr native_editor = editor.NativePtr;
             uint* data_size = null;
-            byte* ret = imnodesNative.imnodes_SaveEditorStateToIniString(editor, data_size);
+            byte* ret = imnodesNative.imnodes_SaveEditorStateToIniString(native_editor, data_size);
             return Util.StringFromPtr(ret);
         }
-        public static string SaveEditorStateToIniString(IntPtr editor, ref uint data_size)
+        public static string SaveEditorStateToIniString(ImNodesEditorContextPtr editor, ref uint data_size)
         {
+            IntPtr native_editor = editor.NativePtr;
             fixed (uint* native_data_size = &data_size)
             {
-                byte* ret = imnodesNative.imnodes_SaveEditorStateToIniString(editor, native_data_size);
+                byte* ret = imnodesNative.imnodes_SaveEditorStateToIniString(native_editor, native_data_size);
                 return Util.StringFromPtr(ret);
             }
+        }
+        public static void SelectLink(int link_id)
+        {
+            imnodesNative.imnodes_SelectLink(link_id);
+        }
+        public static void SelectNode(int node_id)
+        {
+            imnodesNative.imnodes_SelectNode(node_id);
+        }
+        public static void SetCurrentContext(ImNodesContextPtr ctx)
+        {
+            IntPtr native_ctx = ctx.NativePtr;
+            imnodesNative.imnodes_SetCurrentContext(native_ctx);
         }
         public static void SetImGuiContext(IntPtr ctx)
         {
@@ -717,21 +816,39 @@ namespace imnodesNET
         {
             imnodesNative.imnodes_SetNodeScreenSpacePos(node_id, screen_space_pos);
         }
-        public static void Shutdown()
+        public static void SnapNodeToGrid(int node_id)
         {
-            imnodesNative.imnodes_Shutdown();
+            imnodesNative.imnodes_SnapNodeToGrid(node_id);
         }
         public static void StyleColorsClassic()
         {
-            imnodesNative.imnodes_StyleColorsClassic();
+            ImNodesStyle* dest = null;
+            imnodesNative.imnodes_StyleColorsClassic(dest);
+        }
+        public static void StyleColorsClassic(ImNodesStylePtr dest)
+        {
+            ImNodesStyle* native_dest = dest.NativePtr;
+            imnodesNative.imnodes_StyleColorsClassic(native_dest);
         }
         public static void StyleColorsDark()
         {
-            imnodesNative.imnodes_StyleColorsDark();
+            ImNodesStyle* dest = null;
+            imnodesNative.imnodes_StyleColorsDark(dest);
+        }
+        public static void StyleColorsDark(ImNodesStylePtr dest)
+        {
+            ImNodesStyle* native_dest = dest.NativePtr;
+            imnodesNative.imnodes_StyleColorsDark(native_dest);
         }
         public static void StyleColorsLight()
         {
-            imnodesNative.imnodes_StyleColorsLight();
+            ImNodesStyle* dest = null;
+            imnodesNative.imnodes_StyleColorsLight(dest);
+        }
+        public static void StyleColorsLight(ImNodesStylePtr dest)
+        {
+            ImNodesStyle* native_dest = dest.NativePtr;
+            imnodesNative.imnodes_StyleColorsLight(native_dest);
         }
     }
 }

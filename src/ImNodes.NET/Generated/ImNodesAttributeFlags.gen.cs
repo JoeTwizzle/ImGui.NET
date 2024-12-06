@@ -1,7 +1,7 @@
-namespace imnodesNET
+namespace ImNodesNET
 {
     [System.Flags]
-    public enum AttributeFlags
+    public enum ImNodesAttributeFlags
     {
         None = 0,
         EnableLinkDetachWithDragClick = 1,

@@ -2324,26 +2324,80 @@ namespace ImPlotNET
         {
             float thickness = 1;
             ImPlotDragToolFlags flags = (ImPlotDragToolFlags)0;
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x = &x)
             {
-                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags);
+                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags, out_clicked, out_hovered, held);
                 return ret != 0;
             }
         }
         public static bool DragLineX(int id, ref double x, Vector4 col, float thickness)
         {
             ImPlotDragToolFlags flags = (ImPlotDragToolFlags)0;
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x = &x)
             {
-                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags);
+                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags, out_clicked, out_hovered, held);
                 return ret != 0;
             }
         }
         public static bool DragLineX(int id, ref double x, Vector4 col, float thickness, ImPlotDragToolFlags flags)
         {
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x = &x)
             {
-                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags);
+                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags, out_clicked, out_hovered, held);
+                return ret != 0;
+            }
+        }
+        public static bool DragLineX(int id, ref double x, Vector4 col, float thickness, ImPlotDragToolFlags flags, ref bool out_clicked)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte* out_hovered = null;
+            byte* held = null;
+            fixed (double* native_x = &x)
+            {
+                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags, native_out_clicked, out_hovered, held);
+                out_clicked = native_out_clicked_val != 0;
+                return ret != 0;
+            }
+        }
+        public static bool DragLineX(int id, ref double x, Vector4 col, float thickness, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte* held = null;
+            fixed (double* native_x = &x)
+            {
+                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags, native_out_clicked, native_out_hovered, held);
+                out_clicked = native_out_clicked_val != 0;
+                out_hovered = native_out_hovered_val != 0;
+                return ret != 0;
+            }
+        }
+        public static bool DragLineX(int id, ref double x, Vector4 col, float thickness, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered, ref bool held)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte native_held_val = held ? (byte)1 : (byte)0;
+            byte* native_held = &native_held_val;
+            fixed (double* native_x = &x)
+            {
+                byte ret = ImPlotNative.ImPlot_DragLineX(id, native_x, col, thickness, flags, native_out_clicked, native_out_hovered, native_held);
+                out_clicked = native_out_clicked_val != 0;
+                out_hovered = native_out_hovered_val != 0;
+                held = native_held_val != 0;
                 return ret != 0;
             }
         }
@@ -2351,26 +2405,80 @@ namespace ImPlotNET
         {
             float thickness = 1;
             ImPlotDragToolFlags flags = (ImPlotDragToolFlags)0;
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_y = &y)
             {
-                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags);
+                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags, out_clicked, out_hovered, held);
                 return ret != 0;
             }
         }
         public static bool DragLineY(int id, ref double y, Vector4 col, float thickness)
         {
             ImPlotDragToolFlags flags = (ImPlotDragToolFlags)0;
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_y = &y)
             {
-                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags);
+                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags, out_clicked, out_hovered, held);
                 return ret != 0;
             }
         }
         public static bool DragLineY(int id, ref double y, Vector4 col, float thickness, ImPlotDragToolFlags flags)
         {
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_y = &y)
             {
-                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags);
+                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags, out_clicked, out_hovered, held);
+                return ret != 0;
+            }
+        }
+        public static bool DragLineY(int id, ref double y, Vector4 col, float thickness, ImPlotDragToolFlags flags, ref bool out_clicked)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte* out_hovered = null;
+            byte* held = null;
+            fixed (double* native_y = &y)
+            {
+                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags, native_out_clicked, out_hovered, held);
+                out_clicked = native_out_clicked_val != 0;
+                return ret != 0;
+            }
+        }
+        public static bool DragLineY(int id, ref double y, Vector4 col, float thickness, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte* held = null;
+            fixed (double* native_y = &y)
+            {
+                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags, native_out_clicked, native_out_hovered, held);
+                out_clicked = native_out_clicked_val != 0;
+                out_hovered = native_out_hovered_val != 0;
+                return ret != 0;
+            }
+        }
+        public static bool DragLineY(int id, ref double y, Vector4 col, float thickness, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered, ref bool held)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte native_held_val = held ? (byte)1 : (byte)0;
+            byte* native_held = &native_held_val;
+            fixed (double* native_y = &y)
+            {
+                byte ret = ImPlotNative.ImPlot_DragLineY(id, native_y, col, thickness, flags, native_out_clicked, native_out_hovered, native_held);
+                out_clicked = native_out_clicked_val != 0;
+                out_hovered = native_out_hovered_val != 0;
+                held = native_held_val != 0;
                 return ret != 0;
             }
         }
@@ -2378,11 +2486,14 @@ namespace ImPlotNET
         {
             float size = 4;
             ImPlotDragToolFlags flags = (ImPlotDragToolFlags)0;
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x = &x)
             {
                 fixed (double* native_y = &y)
                 {
-                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags);
+                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags, out_clicked, out_hovered, held);
                     return ret != 0;
                 }
             }
@@ -2390,22 +2501,82 @@ namespace ImPlotNET
         public static bool DragPoint(int id, ref double x, ref double y, Vector4 col, float size)
         {
             ImPlotDragToolFlags flags = (ImPlotDragToolFlags)0;
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x = &x)
             {
                 fixed (double* native_y = &y)
                 {
-                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags);
+                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags, out_clicked, out_hovered, held);
                     return ret != 0;
                 }
             }
         }
         public static bool DragPoint(int id, ref double x, ref double y, Vector4 col, float size, ImPlotDragToolFlags flags)
         {
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x = &x)
             {
                 fixed (double* native_y = &y)
                 {
-                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags);
+                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags, out_clicked, out_hovered, held);
+                    return ret != 0;
+                }
+            }
+        }
+        public static bool DragPoint(int id, ref double x, ref double y, Vector4 col, float size, ImPlotDragToolFlags flags, ref bool out_clicked)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte* out_hovered = null;
+            byte* held = null;
+            fixed (double* native_x = &x)
+            {
+                fixed (double* native_y = &y)
+                {
+                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags, native_out_clicked, out_hovered, held);
+                    out_clicked = native_out_clicked_val != 0;
+                    return ret != 0;
+                }
+            }
+        }
+        public static bool DragPoint(int id, ref double x, ref double y, Vector4 col, float size, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte* held = null;
+            fixed (double* native_x = &x)
+            {
+                fixed (double* native_y = &y)
+                {
+                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags, native_out_clicked, native_out_hovered, held);
+                    out_clicked = native_out_clicked_val != 0;
+                    out_hovered = native_out_hovered_val != 0;
+                    return ret != 0;
+                }
+            }
+        }
+        public static bool DragPoint(int id, ref double x, ref double y, Vector4 col, float size, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered, ref bool held)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte native_held_val = held ? (byte)1 : (byte)0;
+            byte* native_held = &native_held_val;
+            fixed (double* native_x = &x)
+            {
+                fixed (double* native_y = &y)
+                {
+                    byte ret = ImPlotNative.ImPlot_DragPoint(id, native_x, native_y, col, size, flags, native_out_clicked, native_out_hovered, native_held);
+                    out_clicked = native_out_clicked_val != 0;
+                    out_hovered = native_out_hovered_val != 0;
+                    held = native_held_val != 0;
                     return ret != 0;
                 }
             }
@@ -2413,6 +2584,9 @@ namespace ImPlotNET
         public static bool DragRect(int id, ref double x1, ref double y1, ref double x2, ref double y2, Vector4 col)
         {
             ImPlotDragToolFlags flags = (ImPlotDragToolFlags)0;
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x1 = &x1)
             {
                 fixed (double* native_y1 = &y1)
@@ -2421,7 +2595,7 @@ namespace ImPlotNET
                     {
                         fixed (double* native_y2 = &y2)
                         {
-                            byte ret = ImPlotNative.ImPlot_DragRect(id, native_x1, native_y1, native_x2, native_y2, col, flags);
+                            byte ret = ImPlotNative.ImPlot_DragRect(id, native_x1, native_y1, native_x2, native_y2, col, flags, out_clicked, out_hovered, held);
                             return ret != 0;
                         }
                     }
@@ -2430,6 +2604,9 @@ namespace ImPlotNET
         }
         public static bool DragRect(int id, ref double x1, ref double y1, ref double x2, ref double y2, Vector4 col, ImPlotDragToolFlags flags)
         {
+            byte* out_clicked = null;
+            byte* out_hovered = null;
+            byte* held = null;
             fixed (double* native_x1 = &x1)
             {
                 fixed (double* native_y1 = &y1)
@@ -2438,7 +2615,79 @@ namespace ImPlotNET
                     {
                         fixed (double* native_y2 = &y2)
                         {
-                            byte ret = ImPlotNative.ImPlot_DragRect(id, native_x1, native_y1, native_x2, native_y2, col, flags);
+                            byte ret = ImPlotNative.ImPlot_DragRect(id, native_x1, native_y1, native_x2, native_y2, col, flags, out_clicked, out_hovered, held);
+                            return ret != 0;
+                        }
+                    }
+                }
+            }
+        }
+        public static bool DragRect(int id, ref double x1, ref double y1, ref double x2, ref double y2, Vector4 col, ImPlotDragToolFlags flags, ref bool out_clicked)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte* out_hovered = null;
+            byte* held = null;
+            fixed (double* native_x1 = &x1)
+            {
+                fixed (double* native_y1 = &y1)
+                {
+                    fixed (double* native_x2 = &x2)
+                    {
+                        fixed (double* native_y2 = &y2)
+                        {
+                            byte ret = ImPlotNative.ImPlot_DragRect(id, native_x1, native_y1, native_x2, native_y2, col, flags, native_out_clicked, out_hovered, held);
+                            out_clicked = native_out_clicked_val != 0;
+                            return ret != 0;
+                        }
+                    }
+                }
+            }
+        }
+        public static bool DragRect(int id, ref double x1, ref double y1, ref double x2, ref double y2, Vector4 col, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte* held = null;
+            fixed (double* native_x1 = &x1)
+            {
+                fixed (double* native_y1 = &y1)
+                {
+                    fixed (double* native_x2 = &x2)
+                    {
+                        fixed (double* native_y2 = &y2)
+                        {
+                            byte ret = ImPlotNative.ImPlot_DragRect(id, native_x1, native_y1, native_x2, native_y2, col, flags, native_out_clicked, native_out_hovered, held);
+                            out_clicked = native_out_clicked_val != 0;
+                            out_hovered = native_out_hovered_val != 0;
+                            return ret != 0;
+                        }
+                    }
+                }
+            }
+        }
+        public static bool DragRect(int id, ref double x1, ref double y1, ref double x2, ref double y2, Vector4 col, ImPlotDragToolFlags flags, ref bool out_clicked, ref bool out_hovered, ref bool held)
+        {
+            byte native_out_clicked_val = out_clicked ? (byte)1 : (byte)0;
+            byte* native_out_clicked = &native_out_clicked_val;
+            byte native_out_hovered_val = out_hovered ? (byte)1 : (byte)0;
+            byte* native_out_hovered = &native_out_hovered_val;
+            byte native_held_val = held ? (byte)1 : (byte)0;
+            byte* native_held = &native_held_val;
+            fixed (double* native_x1 = &x1)
+            {
+                fixed (double* native_y1 = &y1)
+                {
+                    fixed (double* native_x2 = &x2)
+                    {
+                        fixed (double* native_y2 = &y2)
+                        {
+                            byte ret = ImPlotNative.ImPlot_DragRect(id, native_x1, native_y1, native_x2, native_y2, col, flags, native_out_clicked, native_out_hovered, native_held);
+                            out_clicked = native_out_clicked_val != 0;
+                            out_hovered = native_out_hovered_val != 0;
+                            held = native_held_val != 0;
                             return ret != 0;
                         }
                     }
@@ -2587,21 +2836,24 @@ namespace ImPlotNET
         }
         public static ImPlotRect GetPlotLimits()
         {
+            ImPlotRect __retval;
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotLimits(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotLimits(ImAxis x_axis)
         {
+            ImPlotRect __retval;
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotLimits(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotLimits(ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotLimits(x_axis, y_axis);
-            return ret;
+            ImPlotRect __retval;
+            ImPlotNative.ImPlot_GetPlotLimits(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotPoint GetPlotMousePos()
         {
@@ -2632,21 +2884,24 @@ namespace ImPlotNET
         }
         public static ImPlotRect GetPlotSelection()
         {
+            ImPlotRect __retval;
             ImAxis x_axis = (ImAxis)(-1);
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotSelection(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotSelection(ImAxis x_axis)
         {
+            ImPlotRect __retval;
             ImAxis y_axis = (ImAxis)(-1);
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
-            return ret;
+            ImPlotNative.ImPlot_GetPlotSelection(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static ImPlotRect GetPlotSelection(ImAxis x_axis, ImAxis y_axis)
         {
-            ImPlotRect ret = ImPlotNative.ImPlot_GetPlotSelection(x_axis, y_axis);
-            return ret;
+            ImPlotRect __retval;
+            ImPlotNative.ImPlot_GetPlotSelection(&__retval, x_axis, y_axis);
+            return __retval;
         }
         public static Vector2 GetPlotSize()
         {
@@ -43975,6 +44230,1296 @@ namespace ImPlotNET
                 Util.Free(native_label_id);
             }
         }
+        public static void PlotPieChart(string[] label_ids, ref float values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (float* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref float values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (float* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref float values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (float* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref float values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (float* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref double values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (double* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref double values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (double* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref double values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (double* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref double values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (double* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref sbyte values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (sbyte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref sbyte values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (sbyte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref sbyte values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (sbyte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref sbyte values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (sbyte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref byte values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (byte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref byte values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (byte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref byte values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (byte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref byte values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (byte* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref short values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (short* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref short values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (short* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref short values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (short* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref short values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (short* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ushort values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (ushort* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ushort values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (ushort* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ushort values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (ushort* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ushort values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (ushort* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref int values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (int* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref int values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (int* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref int values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (int* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref int values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (int* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref uint values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (uint* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref uint values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (uint* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref uint values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (uint* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref uint values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (uint* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref long values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (long* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref long values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (long* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref long values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (long* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref long values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (long* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ulong values, int count, double x, double y, double radius, IntPtr fmt)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* fmt_data = null;
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (ulong* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ulong values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            double angle0 = 90;
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (ulong* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ulong values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
+            fixed (ulong* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
+        public static void PlotPieChart(string[] label_ids, ref ulong values, int count, double x, double y, double radius, IntPtr fmt, IntPtr fmt_data, double angle0, ImPlotPieChartFlags flags)
+        {
+            int* label_ids_byteCounts = stackalloc int[label_ids.Length];
+            int label_ids_byteCount = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                label_ids_byteCounts[i] = Encoding.UTF8.GetByteCount(s);
+                label_ids_byteCount += label_ids_byteCounts[i] + 1;
+            }
+            byte* native_label_ids_data = stackalloc byte[label_ids_byteCount];
+            int offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                string s = label_ids[i];
+                offset += Util.GetUtf8(s, native_label_ids_data + offset, label_ids_byteCounts[i]);
+                native_label_ids_data[offset++] = 0;
+            }
+            byte** native_label_ids = stackalloc byte*[label_ids.Length];
+            offset = 0;
+            for (int i = 0; i < label_ids.Length; i++)
+            {
+                native_label_ids[i] = &native_label_ids_data[offset];
+                offset += label_ids_byteCounts[i] + 1;
+            }
+            void* native_fmt_data = (void*)fmt_data.ToPointer();
+            fixed (ulong* native_values = &values)
+            {
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrPlotFormatter(native_label_ids, native_values, count, x, y, radius, fmt, native_fmt_data, angle0, flags);
+            }
+        }
         public static void PlotPieChart(string[] label_ids, ref float values, int count, double x, double y, double radius)
         {
             int* label_ids_byteCounts = stackalloc int[label_ids.Length];
@@ -44018,7 +45563,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (float* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_FloatPtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44073,7 +45618,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (float* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_FloatPtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44128,7 +45673,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (float* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_FloatPtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44182,7 +45727,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (float* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_FloatPtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44236,7 +45781,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (float* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_FloatPtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44289,7 +45834,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (float* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_FloatPtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44342,7 +45887,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (float* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_FloatPtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_FloatPtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44392,7 +45937,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (double* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_doublePtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44447,7 +45992,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (double* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_doublePtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44502,7 +46047,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (double* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_doublePtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44556,7 +46101,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (double* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_doublePtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44610,7 +46155,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (double* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_doublePtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44663,7 +46208,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (double* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_doublePtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44716,7 +46261,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (double* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_doublePtr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_doublePtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44766,7 +46311,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (sbyte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44821,7 +46366,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (sbyte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44876,7 +46421,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (sbyte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44930,7 +46475,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (sbyte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -44984,7 +46529,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (sbyte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45037,7 +46582,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (sbyte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45090,7 +46635,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (sbyte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45140,7 +46685,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (byte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45195,7 +46740,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (byte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45250,7 +46795,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (byte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45304,7 +46849,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (byte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45358,7 +46903,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (byte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45411,7 +46956,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (byte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45464,7 +47009,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (byte* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U8Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U8PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45514,7 +47059,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (short* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45569,7 +47114,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (short* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45624,7 +47169,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (short* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45678,7 +47223,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (short* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45732,7 +47277,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (short* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45785,7 +47330,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (short* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45838,7 +47383,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (short* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45888,7 +47433,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ushort* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45943,7 +47488,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ushort* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -45998,7 +47543,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ushort* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46052,7 +47597,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ushort* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46106,7 +47651,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ushort* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46159,7 +47704,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (ushort* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46212,7 +47757,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (ushort* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U16Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U16PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46262,7 +47807,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (int* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46317,7 +47862,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (int* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46372,7 +47917,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (int* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46426,7 +47971,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (int* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46480,7 +48025,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (int* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46533,7 +48078,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (int* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46586,7 +48131,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (int* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46636,7 +48181,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (uint* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46691,7 +48236,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (uint* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46746,7 +48291,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (uint* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46800,7 +48345,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (uint* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46854,7 +48399,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (uint* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46907,7 +48452,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (uint* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -46960,7 +48505,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (uint* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U32Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U32PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47010,7 +48555,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (long* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47065,7 +48610,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (long* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47120,7 +48665,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (long* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47174,7 +48719,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (long* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47228,7 +48773,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (long* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47281,7 +48826,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (long* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47334,7 +48879,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (long* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_S64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_S64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47384,7 +48929,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ulong* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47439,7 +48984,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ulong* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47494,7 +49039,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ulong* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47548,7 +49093,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ulong* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47602,7 +49147,7 @@ namespace ImPlotNET
             ImPlotPieChartFlags flags = (ImPlotPieChartFlags)0;
             fixed (ulong* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47655,7 +49200,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (ulong* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);
@@ -47708,7 +49253,7 @@ namespace ImPlotNET
             else { native_label_fmt = null; }
             fixed (ulong* native_values = &values)
             {
-                ImPlotNative.ImPlot_PlotPieChart_U64Ptr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
+                ImPlotNative.ImPlot_PlotPieChart_U64PtrStr(native_label_ids, native_values, count, x, y, radius, native_label_fmt, angle0, flags);
                 if (label_fmt_byteCount > Util.StackAllocationSizeLimit)
                 {
                     Util.Free(native_label_fmt);

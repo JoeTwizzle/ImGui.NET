@@ -39,7 +39,7 @@ namespace ImGuiNET
                 native_str[native_str_offset] = 0;
             }
             else { native_str = null; }
-            ImGuiNative.ImGuiTextBuffer_append((ImGuiTextBuffer*)(NativePtr), native_str, native_str+str_byteCount);
+            ImGuiNative.ImGuiTextBuffer_append(NativePtr, native_str, native_str+str_byteCount);
             if (str_byteCount > Util.StackAllocationSizeLimit)
             {
                 Util.Free(native_str);
@@ -73,7 +73,7 @@ namespace ImGuiNET
             }
         }
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
-        public void appendf(ReadOnlySpan<char> fmt)
+        public void appendf(ref ImGuiTextBuffer buffer, ReadOnlySpan<char> fmt)
         {
             byte* native_fmt;
             int fmt_byteCount = 0;
@@ -93,14 +93,17 @@ namespace ImGuiNET
                 native_fmt[native_fmt_offset] = 0;
             }
             else { native_fmt = null; }
-            ImGuiNative.ImGuiTextBuffer_appendf((ImGuiTextBuffer*)(NativePtr), native_fmt);
-            if (fmt_byteCount > Util.StackAllocationSizeLimit)
+            fixed ( ImGuiTextBuffer* native_buffer = &buffer)
             {
-                Util.Free(native_fmt);
+                ImGuiNative.ImGuiTextBuffer_appendf(native_buffer, native_fmt);
+                if (fmt_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    Util.Free(native_fmt);
+                }
             }
         }
 #endif
-        public void appendf(string fmt)
+        public void appendf(ref  ImGuiTextBuffer buffer, string fmt)
         {
             byte* native_fmt;
             int fmt_byteCount = 0;
@@ -120,10 +123,13 @@ namespace ImGuiNET
                 native_fmt[native_fmt_offset] = 0;
             }
             else { native_fmt = null; }
-            ImGuiNative.ImGuiTextBuffer_appendf((ImGuiTextBuffer*)(NativePtr), native_fmt);
-            if (fmt_byteCount > Util.StackAllocationSizeLimit)
+            fixed ( ImGuiTextBuffer* native_buffer = &buffer)
             {
-                Util.Free(native_fmt);
+                ImGuiNative.ImGuiTextBuffer_appendf(native_buffer, native_fmt);
+                if (fmt_byteCount > Util.StackAllocationSizeLimit)
+                {
+                    Util.Free(native_fmt);
+                }
             }
         }
         public string begin()

@@ -12,6 +12,7 @@ namespace ImGuiNET
         public ushort X;
         public ushort Y;
         public uint GlyphID;
+        public uint GlyphColored;
         public float GlyphAdvanceX;
         public Vector2 GlyphOffset;
         public ImFont* Font;
@@ -29,6 +30,7 @@ namespace ImGuiNET
         public ref ushort X => ref Unsafe.AsRef<ushort>(&NativePtr->X);
         public ref ushort Y => ref Unsafe.AsRef<ushort>(&NativePtr->Y);
         public ref uint GlyphID => ref Unsafe.AsRef<uint>(&NativePtr->GlyphID);
+        public ref uint GlyphColored => ref Unsafe.AsRef<uint>(&NativePtr->GlyphColored);
         public ref float GlyphAdvanceX => ref Unsafe.AsRef<float>(&NativePtr->GlyphAdvanceX);
         public ref Vector2 GlyphOffset => ref Unsafe.AsRef<Vector2>(&NativePtr->GlyphOffset);
         public ImFontPtr Font => new ImFontPtr(NativePtr->Font);

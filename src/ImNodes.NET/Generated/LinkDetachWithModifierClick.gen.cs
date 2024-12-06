@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using ImGuiNET;
 
-namespace imnodesNET
+namespace ImNodesNET
 {
     public unsafe partial struct LinkDetachWithModifierClick
     {
-        public byte* modifier;
+        public byte* Modifier;
     }
     public unsafe partial struct LinkDetachWithModifierClickPtr
     {
@@ -18,7 +18,7 @@ namespace imnodesNET
         public static implicit operator LinkDetachWithModifierClickPtr(LinkDetachWithModifierClick* nativePtr) => new LinkDetachWithModifierClickPtr(nativePtr);
         public static implicit operator LinkDetachWithModifierClick* (LinkDetachWithModifierClickPtr wrappedPtr) => wrappedPtr.NativePtr;
         public static implicit operator LinkDetachWithModifierClickPtr(IntPtr nativePtr) => new LinkDetachWithModifierClickPtr(nativePtr);
-        public IntPtr modifier { get => (IntPtr)NativePtr->modifier; set => NativePtr->modifier = (byte*)value; }
+        public IntPtr Modifier { get => (IntPtr)NativePtr->Modifier; set => NativePtr->Modifier = (byte*)value; }
         public void Destroy()
         {
             imnodesNative.LinkDetachWithModifierClick_destroy((LinkDetachWithModifierClick*)(NativePtr));

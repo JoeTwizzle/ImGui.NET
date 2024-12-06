@@ -5,5 +5,6 @@ namespace ImPlotNET
     {
         None = 0,
         Normalize = 1024,
+        IgnoreHidden = 2048,
     }
 }

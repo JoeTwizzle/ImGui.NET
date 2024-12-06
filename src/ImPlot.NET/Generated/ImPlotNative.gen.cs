@@ -52,13 +52,13 @@ namespace ImPlotNET
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlot_DestroyContext(IntPtr ctx);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImPlot_DragLineX(int id, double* x, Vector4 col, float thickness, ImPlotDragToolFlags flags);
+        public static extern byte ImPlot_DragLineX(int id, double* x, Vector4 col, float thickness, ImPlotDragToolFlags flags, byte* out_clicked, byte* out_hovered, byte* held);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImPlot_DragLineY(int id, double* y, Vector4 col, float thickness, ImPlotDragToolFlags flags);
+        public static extern byte ImPlot_DragLineY(int id, double* y, Vector4 col, float thickness, ImPlotDragToolFlags flags, byte* out_clicked, byte* out_hovered, byte* held);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImPlot_DragPoint(int id, double* x, double* y, Vector4 col, float size, ImPlotDragToolFlags flags);
+        public static extern byte ImPlot_DragPoint(int id, double* x, double* y, Vector4 col, float size, ImPlotDragToolFlags flags, byte* out_clicked, byte* out_hovered, byte* held);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte ImPlot_DragRect(int id, double* x1, double* y1, double* x2, double* y2, Vector4 col, ImPlotDragToolFlags flags);
+        public static extern byte ImPlot_DragRect(int id, double* x1, double* y1, double* x2, double* y2, Vector4 col, ImPlotDragToolFlags flags, byte* out_clicked, byte* out_hovered, byte* held);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlot_EndAlignedPlots();
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
@@ -92,13 +92,13 @@ namespace ImPlotNET
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern ImDrawList* ImPlot_GetPlotDrawList();
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ImPlotRect ImPlot_GetPlotLimits(ImAxis x_axis, ImAxis y_axis);
+        public static extern void ImPlot_GetPlotLimits(ImPlotRect* pOut, ImAxis x_axis, ImAxis y_axis);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlot_GetPlotMousePos(ImPlotPoint* pOut, ImAxis x_axis, ImAxis y_axis);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlot_GetPlotPos(Vector2* pOut);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ImPlotRect ImPlot_GetPlotSelection(ImAxis x_axis, ImAxis y_axis);
+        public static extern void ImPlot_GetPlotSelection(ImPlotRect* pOut, ImAxis x_axis, ImAxis y_axis);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlot_GetPlotSize(Vector2* pOut);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
@@ -382,25 +382,45 @@ namespace ImPlotNET
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlot_PlotLineG(byte* label_id, IntPtr getter, void* data, int count, ImPlotLineFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_FloatPtr(byte** label_ids, float* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_FloatPtrPlotFormatter(byte** label_ids, float* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_doublePtr(byte** label_ids, double* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_doublePtrPlotFormatter(byte** label_ids, double* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_S8Ptr(byte** label_ids, sbyte* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_S8PtrPlotFormatter(byte** label_ids, sbyte* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_U8Ptr(byte** label_ids, byte* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_U8PtrPlotFormatter(byte** label_ids, byte* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_S16Ptr(byte** label_ids, short* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_S16PtrPlotFormatter(byte** label_ids, short* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_U16Ptr(byte** label_ids, ushort* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_U16PtrPlotFormatter(byte** label_ids, ushort* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_S32Ptr(byte** label_ids, int* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_S32PtrPlotFormatter(byte** label_ids, int* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_U32Ptr(byte** label_ids, uint* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_U32PtrPlotFormatter(byte** label_ids, uint* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_S64Ptr(byte** label_ids, long* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_S64PtrPlotFormatter(byte** label_ids, long* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ImPlot_PlotPieChart_U64Ptr(byte** label_ids, ulong* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        public static extern void ImPlot_PlotPieChart_U64PtrPlotFormatter(byte** label_ids, ulong* values, int count, double x, double y, double radius, IntPtr fmt, void* fmt_data, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_FloatPtrStr(byte** label_ids, float* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_doublePtrStr(byte** label_ids, double* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_S8PtrStr(byte** label_ids, sbyte* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_U8PtrStr(byte** label_ids, byte* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_S16PtrStr(byte** label_ids, short* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_U16PtrStr(byte** label_ids, ushort* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_S32PtrStr(byte** label_ids, int* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_U32PtrStr(byte** label_ids, uint* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_S64PtrStr(byte** label_ids, long* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ImPlot_PlotPieChart_U64PtrStr(byte** label_ids, ulong* values, int count, double x, double y, double radius, byte* label_fmt, double angle0, ImPlotPieChartFlags flags);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
         public static extern void ImPlot_PlotScatter_FloatPtrInt(byte* label_id, float* values, int count, double xscale, double xstart, ImPlotScatterFlags flags, int offset, int stride);
         [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]

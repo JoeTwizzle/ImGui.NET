@@ -5,6 +5,10 @@ using System.Reflection;
 using System.IO;
 using Veldrid;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using ImPlotNET;
+using ImNodesNET;
+using ImGuizmoNET;
 
 namespace ImGuiNET
 {
@@ -59,16 +63,26 @@ namespace ImGuiNET
             _windowWidth = width;
             _windowHeight = height;
 
-            ImGui.CreateContext();
+            IntPtr imguiCtx = ImGui.CreateContext();
+            ImGui.SetCurrentContext(imguiCtx);
+
+            // Initialize ImPlot
+            ImPlot.SetImGuiContext(imguiCtx);
+            ImPlot.CreateContext();
+
+            // Initialize ImNodes
+            ImNodes.SetImGuiContext(imguiCtx);
+            ImNodes.CreateContext();
             var io = ImGui.GetIO();
             io.BackendFlags |= ImGuiBackendFlags.RendererHasVtxOffset;
             io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard |
                 ImGuiConfigFlags.DockingEnable;
             io.Fonts.Flags |= ImFontAtlasFlags.NoBakedLines;
-
+            io.BackendRendererUserData = 0;
             CreateDeviceResources(gd, outputDescription);
             SetPerFrameImGuiData(1f / 60f);
             ImGui.NewFrame();
+            //ImGuizmo.BeginFrame();
             _frameBegun = true;
         }
 
@@ -206,25 +220,25 @@ namespace ImGuiNET
             switch (factory.BackendType)
             {
                 case GraphicsBackend.Direct3D11:
-                {
-                    string resourceName = name + ".hlsl.bytes";
-                    return GetEmbeddedResourceBytes(resourceName);
-                }
+                    {
+                        string resourceName = name + ".hlsl.bytes";
+                        return GetEmbeddedResourceBytes(resourceName);
+                    }
                 case GraphicsBackend.OpenGL:
-                {
-                    string resourceName = name + ".glsl";
-                    return GetEmbeddedResourceBytes(resourceName);
-                }
+                    {
+                        string resourceName = name + ".glsl";
+                        return GetEmbeddedResourceBytes(resourceName);
+                    }
                 case GraphicsBackend.Vulkan:
-                {
-                    string resourceName = name + ".spv";
-                    return GetEmbeddedResourceBytes(resourceName);
-                }
+                    {
+                        string resourceName = name + ".spv";
+                        return GetEmbeddedResourceBytes(resourceName);
+                    }
                 case GraphicsBackend.Metal:
-                {
-                    string resourceName = name + ".metallib";
-                    return GetEmbeddedResourceBytes(resourceName);
-                }
+                    {
+                        string resourceName = name + ".metallib";
+                        return GetEmbeddedResourceBytes(resourceName);
+                    }
                 default:
                     throw new NotImplementedException();
             }
@@ -309,7 +323,8 @@ namespace ImGuiNET
             UpdateImGuiInput(snapshot);
 
             _frameBegun = true;
-            ImGui.NewFrame();
+            ImGui.NewFrame(); 
+            //ImGuizmo.BeginFrame();
         }
 
         /// <summary>
@@ -487,7 +502,11 @@ namespace ImGuiNET
                     ImDrawCmdPtr pcmd = cmd_list.CmdBuffer[cmd_i];
                     if (pcmd.UserCallback != IntPtr.Zero)
                     {
-                        //throw new NotImplementedException();
+                        unsafe
+                        {
+                            var callback = (delegate* unmanaged[Cdecl]<ImDrawList*, ImDrawCmd*, void>)pcmd.UserCallback;
+                            callback(cmd_list.NativePtr, pcmd.NativePtr);
+                        }
                     }
                     else
                     {
@@ -502,11 +521,11 @@ namespace ImGuiNET
                                 cl.SetGraphicsResourceSet(1, GetImageResourceSet(pcmd.TextureId));
                             }
                         }
-
+                        Vector2 pos = draw_data.DisplayPos;
                         cl.SetScissorRect(
                             0,
-                            (uint)pcmd.ClipRect.X,
-                            (uint)pcmd.ClipRect.Y,
+                            (uint)(pcmd.ClipRect.X - pos.X),
+                            (uint)(pcmd.ClipRect.Y - pos.Y),
                             (uint)(pcmd.ClipRect.Z - pcmd.ClipRect.X),
                             (uint)(pcmd.ClipRect.W - pcmd.ClipRect.Y));
 

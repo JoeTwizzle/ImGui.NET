@@ -10,10 +10,9 @@ namespace ImPlotNET
         NoInputs = 8,
         NoMenus = 16,
         NoBoxSelect = 32,
-        NoChild = 64,
-        NoFrame = 128,
-        Equal = 256,
-        Crosshairs = 512,
+        NoFrame = 64,
+        Equal = 128,
+        Crosshairs = 256,
         CanvasOnly = 55,
     }
 }
