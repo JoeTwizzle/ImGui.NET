@@ -7,11 +7,17 @@ using Veldrid;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using ImPlotNET;
-using ImNodesNET;
+using imnodesNET;
 using ImGuizmoNET;
+using System.Runtime.InteropServices;
 
 namespace ImGuiNET
 {
+    static class Helpera
+    {
+        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern void igSetAllocatorFunctions(nint alloc_func, nint free_func, void* user_data);
+    }
     /// <summary>
     /// A modified version of Veldrid.ImGui's ImGuiRenderer.
     /// Manages input for ImGui and handles rendering ImGui's DrawLists with Veldrid.
@@ -57,7 +63,7 @@ namespace ImGuiNET
         /// <summary>
         /// Constructs a new ImGuiController.
         /// </summary>
-        public ImGuiController(GraphicsDevice gd, OutputDescription outputDescription, int width, int height)
+        public unsafe ImGuiController(GraphicsDevice gd, OutputDescription outputDescription, int width, int height)
         {
             _gd = gd;
             _windowWidth = width;
@@ -65,15 +71,25 @@ namespace ImGuiNET
 
             IntPtr imguiCtx = ImGui.CreateContext();
             ImGui.SetCurrentContext(imguiCtx);
-
+     
+            
             // Initialize ImPlot
-            ImPlot.SetImGuiContext(imguiCtx);
-            ImPlot.CreateContext();
+            //ImPlot.SetImGuiContext(imguiCtx);
+            var implotctx = ImPlot.CreateContext();
+            //ImPlot.SetCurrentContext(implotctx);
+            //ImPlot.SetImGuiContext(imguiCtx);
+            //Helpera.igSetAllocatorFunctions(a, b, null);
 
             // Initialize ImNodes
-            ImNodes.SetImGuiContext(imguiCtx);
-            ImNodes.CreateContext();
+            //ImNodes.SetImGuiContext(imguiCtx);
+            imnodes.CreateContext();
+            IntPtr a = IntPtr.Zero;
+            IntPtr b = IntPtr.Zero;
+            void* userdata = null;
+            ImGui.GetAllocatorFunctions(ref a, ref b, ref userdata);
             var io = ImGui.GetIO();
+            io.Fonts.AddFontDefault();
+            io.Fonts.Build();          // Build font atlas
             io.BackendFlags |= ImGuiBackendFlags.RendererHasVtxOffset;
             io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard |
                 ImGuiConfigFlags.DockingEnable;
@@ -323,7 +339,7 @@ namespace ImGuiNET
             UpdateImGuiInput(snapshot);
 
             _frameBegun = true;
-            ImGui.NewFrame(); 
+            ImGui.NewFrame();
             //ImGuizmo.BeginFrame();
         }
 

@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>A .NET wrapper for the Dear ImGui library.</Description>
-    <AssemblyVersion>1.91.5</AssemblyVersion>
+    <AssemblyVersion>1.91.5.1</AssemblyVersion>
     <Authors>Eric Mellino, Joe Twizzle</Authors>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
-    <AssemblyName>ImGui.NET</AssemblyName>
-    <PackageId>Twizzle.ImGui.NET</PackageId>
-    <PackagePrereleaseIdentifier></PackagePrereleaseIdentifier>
+    <AssemblyName>ImGui-Bundle.NET</AssemblyName>
+    <PackageId>Twizzle.ImGui-Bundle.NET</PackageId>
+    <PackagePrereleaseIdentifier>-alpha</PackagePrereleaseIdentifier>
     <PackageVersion>$(AssemblyVersion)$(PackagePrereleaseIdentifier)</PackageVersion>
-    <PackageTags>ImGui ImGui.NET Immediate Mode GUI GameDev</PackageTags>
+    <PackageTags>ImGui ImPlot ImNodes ImGuizmo ImGui.NET Immediate Mode GUI GameDev</PackageTags>
     <PackageProjectUrl>https://github.com/JoeTwizzle/ImGui.NET/tree/docking</PackageProjectUrl>
     <DocumentationFile Condition="'$(Configuration)' == 'Release'">$(OutputPath)\ImGui.NET.xml</DocumentationFile>
     <RootNamespace>ImGuiNET</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>C# Bindings for Dear ImGui</Title>
+    <Title>C# Bindings for Dear ImGui and more</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>

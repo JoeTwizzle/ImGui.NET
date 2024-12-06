@@ -4,12 +4,15 @@ using System.Linq;
 using System.Numerics;
 using ImPlotNET;
 using System.Runtime.CompilerServices;
-using TestDotNetStandardLib;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
 
 using static ImGuiNET.ImGuiNative;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.InteropServices;
+using static System.Net.Mime.MediaTypeNames;
+using imnodesNET;
 
 namespace ImGuiNET
 {
@@ -82,7 +85,8 @@ namespace ImGuiNET
             _cl.Dispose();
             _gd.Dispose();
         }
-
+        static bool once = true;
+        static float[] data = { 1, 1, 2, 3, 4, 52, 5, 23, 45 };
         private static unsafe void SubmitUI()
         {
             // Demo code adapted from the official Dear ImGui demo program:
@@ -117,6 +121,14 @@ namespace ImGuiNET
             if (_showAnotherWindow)
             {
                 ImGui.Begin("Another Window", ref _showAnotherWindow);
+                imnodes.BeginNodeEditor();
+                imnodes.EndNodeEditor();
+                //if (once && ImPlot.BeginPlot("My Plot")) once = false;
+                if (ImPlot.BeginPlot("My Plot"))
+                {
+                    ImPlot.PlotBars("Cool bar chart", ref data[0], data.Length);
+                    ImPlot.EndPlot();
+                }
                 ImGui.Text("Hello from another window!");
                 if (ImGui.Button("Close Me"))
                     _showAnotherWindow = false;
@@ -131,7 +143,7 @@ namespace ImGuiNET
                 ImGui.SetNextWindowPos(new Vector2(650, 20), ImGuiCond.FirstUseEver);
                 ImGui.ShowDemoWindow(ref _showImGuiDemoWindow);
             }
-            
+
             if (ImGui.TreeNode("Tabs"))
             {
                 if (ImGui.TreeNode("Basic"))
@@ -209,21 +221,21 @@ namespace ImGuiNET
                 ImGui.Text("Memory editor currently supported.");
                 // _memoryEditor.Draw("Memory Editor", _memoryEditorData, _memoryEditorData.Length);
             }
-            
+
             // ReadOnlySpan<char> and .NET Standard 2.0 tests
-            TestStringParameterOnDotNetStandard.Text(); // String overloads should always be available.
-            
+            //TestStringParameterOnDotNetStandard.Text(); // String overloads should always be available.
+
             // On .NET Standard 2.1 or greater, you can use ReadOnlySpan<char> instead of string to prevent allocations.
             long allocBytesStringStart = GC.GetAllocatedBytesForCurrentThread();
             ImGui.Text($"Hello, world {Random.Shared.Next(100)}!");
             long allocBytesStringEnd = GC.GetAllocatedBytesForCurrentThread() - allocBytesStringStart;
             Console.WriteLine("GC (string): " + allocBytesStringEnd);
-                
+
             long allocBytesSpanStart = GC.GetAllocatedBytesForCurrentThread();
             ImGui.Text($"Hello, world {Random.Shared.Next(100)}!".AsSpan()); // Note that this call will STILL allocate memory due to string interpolation, but you can prevent that from happening by using an InterpolatedStringHandler.
             long allocBytesSpanEnd = GC.GetAllocatedBytesForCurrentThread() - allocBytesSpanStart;
             Console.WriteLine("GC (span): " + allocBytesSpanEnd);
-            
+
             ImGui.Text("Empty span:");
             ImGui.SameLine();
             ImGui.GetWindowDrawList().AddText(ImGui.GetCursorScreenPos(), uint.MaxValue, ReadOnlySpan<char>.Empty);
