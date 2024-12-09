@@ -2,19 +2,15 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using ImPlotNET;
 using System.Runtime.CompilerServices;
 using Veldrid;
 using Veldrid.Sdl2;
 using Veldrid.StartupUtilities;
-
-using static ImGuiNET.ImGuiNative;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Runtime.InteropServices;
-using static System.Net.Mime.MediaTypeNames;
+using ImGuiNET;
+using ImPlotNET;
 using imnodesNET;
 
-namespace ImGuiNET
+namespace ImGuiExample
 {
     class Program
     {

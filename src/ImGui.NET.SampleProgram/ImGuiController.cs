@@ -10,14 +10,10 @@ using ImPlotNET;
 using imnodesNET;
 using ImGuizmoNET;
 using System.Runtime.InteropServices;
+using ImGuiNET;
 
-namespace ImGuiNET
+namespace ImGuiExample
 {
-    static class Helpera
-    {
-        [DllImport("cimplot", CallingConvention = CallingConvention.Cdecl)]
-        public unsafe static extern void igSetAllocatorFunctions(nint alloc_func, nint free_func, void* user_data);
-    }
     /// <summary>
     /// A modified version of Veldrid.ImGui's ImGuiRenderer.
     /// Manages input for ImGui and handles rendering ImGui's DrawLists with Veldrid.
@@ -71,17 +67,9 @@ namespace ImGuiNET
 
             IntPtr imguiCtx = ImGui.CreateContext();
             ImGui.SetCurrentContext(imguiCtx);
-     
-            
-            // Initialize ImPlot
-            //ImPlot.SetImGuiContext(imguiCtx);
             var implotctx = ImPlot.CreateContext();
-            //ImPlot.SetCurrentContext(implotctx);
-            //ImPlot.SetImGuiContext(imguiCtx);
-            //Helpera.igSetAllocatorFunctions(a, b, null);
-
-            // Initialize ImNodes
-            //ImNodes.SetImGuiContext(imguiCtx);
+            ImPlot.SetCurrentContext(implotctx);
+            
             imnodes.CreateContext();
             IntPtr a = IntPtr.Zero;
             IntPtr b = IntPtr.Zero;
