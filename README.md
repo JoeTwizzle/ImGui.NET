@@ -1,6 +1,6 @@
 # ImGui-Bundle.NET
 
-This is a .NET wrapper for the immediate mode GUI library, Dear ImGui (https://github.com/ocornut/imgui) and Extensions. ImGui.NET lets you build graphical interfaces using a simple immediate-mode style. ImGui.NET is a .NET Standard library, and can be used on all major .NET runtimes and operating systems.
+This is a .NET wrapper for the immediate mode GUI library, Dear ImGui (https://github.com/ocornut/imgui) and its Extensions. ImGui.NET lets you build graphical interfaces using a simple immediate-mode style. ImGui.NET is a .NET Standard library, and can be used on all major .NET runtimes and operating systems.
 
 Included is a basic sample program that shows how to use the library, and renders the UI using [Veldrid](https://github.com/mellinoe/veldrid), a portable graphics library for .NET. By itself, Dear ImGui does not care what technology you use for rendering; it simply outputs textured triangles. Example renderers also exist for MonoGame and OpenTK (OpenGL).
 
@@ -8,7 +8,7 @@ This wrapper is built on top of [cimgui](https://github.com/Extrawurst/cimgui), 
 
 |    | Release |
 |:---|----------------:|
-|**ImGui.NET**|[![NuGet](https://img.shields.io/nuget/v/Twizzle.ImGui-Bundle.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGui.NET)|
+|**ImGui-Bundle.NET**|[![NuGet](https://img.shields.io/nuget/v/Twizzle.ImGui-Bundle.NET.svg)](https://www.nuget.org/packages/Twizzle.ImGui-Bundle.NET)|
 # Building
 
 ImGui.NET can be built in Visual Studio or on the command line. The .NET Core SDK is needed to build on the command line, and it can be downloaded [here](https://www.microsoft.com/net/core). Visual Studio 2017 is the minimum VS version supported for building.
