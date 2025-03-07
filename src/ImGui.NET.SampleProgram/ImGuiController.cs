@@ -69,10 +69,11 @@ namespace ImGuiExample
             ImGui.SetCurrentContext(imguiCtx);
             var implotctx = ImPlot.CreateContext();
             ImPlot.SetCurrentContext(implotctx);
-            
+
             imnodes.CreateContext();
             IntPtr a = IntPtr.Zero;
             IntPtr b = IntPtr.Zero;
+
             void* userdata = null;
             ImGui.GetAllocatorFunctions(ref a, ref b, ref userdata);
             var io = ImGui.GetIO();
@@ -80,9 +81,17 @@ namespace ImGuiExample
             io.Fonts.Build();          // Build font atlas
             io.BackendFlags |= ImGuiBackendFlags.RendererHasVtxOffset;
             io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard |
-                ImGuiConfigFlags.DockingEnable;
+                ImGuiConfigFlags.DockingEnable | ImGuiConfigFlags.ViewportsEnable;
             io.Fonts.Flags |= ImFontAtlasFlags.NoBakedLines;
             io.BackendRendererUserData = 0;
+
+            var platformIO = ImGui.GetPlatformIO();
+            platformIO.Renderer_CreateWindow = ImGui_ImplDX11_CreateWindow;
+            platformIO.Renderer_DestroyWindow = ImGui_ImplDX11_DestroyWindow;
+            platformIO.Renderer_SetWindowSize = ImGui_ImplDX11_SetWindowSize;
+            platformIO.Renderer_RenderWindow = ImGui_ImplDX11_RenderWindow;
+            platformIO.Renderer_SwapBuffers = ImGui_ImplDX11_SwapBuffers;
+
             CreateDeviceResources(gd, outputDescription);
             SetPerFrameImGuiData(1f / 60f);
             ImGui.NewFrame();
@@ -325,7 +334,11 @@ namespace ImGuiExample
 
             SetPerFrameImGuiData(deltaSeconds);
             UpdateImGuiInput(snapshot);
-
+            if ((ImGui.GetIO().ConfigFlags & ImGuiConfigFlags.ViewportsEnable) != 0)
+            {
+                ImGui.UpdatePlatformWindows();
+                // TODO for OpenGL: restore current GL context.
+            }
             _frameBegun = true;
             ImGui.NewFrame();
             //ImGuizmo.BeginFrame();
@@ -538,6 +551,11 @@ namespace ImGuiExample
                 }
                 vtx_offset += cmd_list.VtxBuffer.Size;
                 idx_offset += cmd_list.IdxBuffer.Size;
+            }
+            if ((ImGui.GetIO().ConfigFlags & ImGuiConfigFlags.ViewportsEnable) != 0)
+            {
+                ImGui.RenderPlatformWindowsDefault();
+                // TODO for OpenGL: restore current GL context.
             }
         }
 
