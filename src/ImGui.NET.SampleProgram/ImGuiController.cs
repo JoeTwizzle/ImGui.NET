@@ -71,11 +71,7 @@ namespace ImGuiExample
             ImPlot.SetCurrentContext(implotctx);
 
             imnodes.CreateContext();
-            IntPtr a = IntPtr.Zero;
-            IntPtr b = IntPtr.Zero;
 
-            void* userdata = null;
-            ImGui.GetAllocatorFunctions(ref a, ref b, ref userdata);
             var io = ImGui.GetIO();
             io.Fonts.AddFontDefault();
             io.Fonts.Build();          // Build font atlas
