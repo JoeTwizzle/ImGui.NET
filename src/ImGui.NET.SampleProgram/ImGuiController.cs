@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Reflection;
@@ -81,16 +81,16 @@ namespace ImGuiExample
             io.Fonts.Build();          // Build font atlas
             io.BackendFlags |= ImGuiBackendFlags.RendererHasVtxOffset;
             io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard |
-                ImGuiConfigFlags.DockingEnable | ImGuiConfigFlags.ViewportsEnable;
+                ImGuiConfigFlags.DockingEnable ;
             io.Fonts.Flags |= ImFontAtlasFlags.NoBakedLines;
             io.BackendRendererUserData = 0;
 
             var platformIO = ImGui.GetPlatformIO();
-            platformIO.Renderer_CreateWindow = ImGui_ImplDX11_CreateWindow;
-            platformIO.Renderer_DestroyWindow = ImGui_ImplDX11_DestroyWindow;
-            platformIO.Renderer_SetWindowSize = ImGui_ImplDX11_SetWindowSize;
-            platformIO.Renderer_RenderWindow = ImGui_ImplDX11_RenderWindow;
-            platformIO.Renderer_SwapBuffers = ImGui_ImplDX11_SwapBuffers;
+            //platformIO.Renderer_CreateWindow = ImGui_ImplDX11_CreateWindow;
+            //platformIO.Renderer_DestroyWindow = ImGui_ImplDX11_DestroyWindow;
+            //platformIO.Renderer_SetWindowSize = ImGui_ImplDX11_SetWindowSize;
+            //platformIO.Renderer_RenderWindow = ImGui_ImplDX11_RenderWindow;
+            //platformIO.Renderer_SwapBuffers = ImGui_ImplDX11_SwapBuffers;
 
             CreateDeviceResources(gd, outputDescription);
             SetPerFrameImGuiData(1f / 60f);
